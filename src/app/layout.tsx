@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { MartPosProvider } from "@/context";
 import "@/sass/index.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <MartPosProvider>{children}</MartPosProvider>
+      </body>
     </html>
   );
 }
