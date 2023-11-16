@@ -1,3 +1,9 @@
+import { Form } from "./Form";
+
 export default function Register() {
-  return <div>Register</div>;
+  return (
+    <div>
+      <Form></Form>
+    </div>
+  );
 }
