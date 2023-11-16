@@ -1,6 +1,6 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { apiLogin } from "@/api";
+import { useAuth } from "@/hooks";
 
 function navigateRute(newPathname: string = "/") {
   const currentOrigin = window.location.origin;
@@ -10,12 +10,13 @@ function navigateRute(newPathname: string = "/") {
 
 export function Form() {
   const { register, handleSubmit } = useForm();
+  const { login } = useAuth();
   return (
     <center>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const res = await apiLogin(data);
-          if (res.data.status === 204) navigateRute();
+          const res = await login(data);
+          if (res.status === 204) navigateRute();
         })}
       >
         <input type="text" {...register("gmail")} />
