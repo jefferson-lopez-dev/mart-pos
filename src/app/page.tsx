@@ -1,7 +1,9 @@
+import { DataAccount } from "../components/DataAccount";
+
 export default function Home() {
   return (
     <div>
-      <h1>Mart POS</h1>
+      <DataAccount></DataAccount>
     </div>
   );
 }
