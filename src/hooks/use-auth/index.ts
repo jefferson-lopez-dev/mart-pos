@@ -7,7 +7,7 @@ interface AuthContextProps {
   logout: () => Promise<void>;
   verifyToken: () => Promise<void>;
   getAccount: () => Promise<void>;
-  account: object | boolean;
+  account: any;
   isAuthenticated: "true" | "false";
 }
 
