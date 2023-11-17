@@ -1,9 +1,11 @@
 "use client";
 import { useAuth } from "@/hooks";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export function DataAccount() {
   const { getAccount, account, logout } = useAuth();
+  const { push } = useRouter();
 
   useEffect(() => {
     function fetchData() {
@@ -23,6 +25,13 @@ export function DataAccount() {
         }}
       >
         Logout
+      </button>
+      <button
+        onClick={() => {
+          push("/profile");
+        }}
+      >
+        Go to profile
       </button>
     </div>
   );
