@@ -16,11 +16,13 @@
     "react-hook-form": "^7.48.2"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
+    "js-cookie": "^3.0.5",
     "typescript": "^5"
   }
 }
