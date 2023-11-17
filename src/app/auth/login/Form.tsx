@@ -2,14 +2,19 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks";
 import Link from "next/link";
+import { useState } from "react";
 
 export function Form() {
   const { register, handleSubmit } = useForm();
   const { login } = useAuth();
+  const [responseLogin, setResponseLogin] = useState<any>({});
 
   const handleLogin = async (data: object) => {
-    await login(data);
+    const res = await login(data);
+    setResponseLogin(res);
   };
+
+  console.log();
 
   return (
     <center>
@@ -22,6 +27,7 @@ export function Form() {
         <button type="submit">Login</button>
         <Link href={"/auth/register"}>Create Account</Link>
       </form>
+      <p>{responseLogin.error}</p>
     </center>
   );
 }
