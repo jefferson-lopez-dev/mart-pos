@@ -1,24 +1,20 @@
 "use client";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks";
 
-function navigateRute(newPathname: string = "/") {
-  const currentOrigin = window.location.origin;
-  const newURL = currentOrigin + newPathname;
-  window.location.href = newURL;
-}
-
 export function Form() {
+  const { push } = useRouter();
   const { register, handleSubmit } = useForm();
-  const { login } = useAuth();
+  const { login, isAuthenticated } = useAuth();
+
+  const handleLogin = async (data: object) => {
+    await login(data);
+  };
+
   return (
     <center>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const res = await login(data);
-          if (res.status === 204) navigateRute();
-        })}
-      >
+      <form onSubmit={handleSubmit(handleLogin)}>
         <input type="text" {...register("gmail")} />
         <br />
         <input type="password" {...register("password")} />
