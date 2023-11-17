@@ -16,7 +16,7 @@ export function DataAccount() {
   return (
     <div>
       <h1>Account</h1>
-      <p>{account.gmail}</p>
+      <p>{account ? account.gmail : "Loading..."}</p>
       <button
         onClick={() => {
           logout();
