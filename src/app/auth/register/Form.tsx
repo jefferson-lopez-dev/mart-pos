@@ -1,24 +1,21 @@
 "use client";
 import { useForm } from "react-hook-form";
-import { apiRegister } from "@/api";
+import { useAuth } from "@/hooks";
 import Link from "next/link";
-
-function navigateRute(newPathname: string = "/") {
-  const currentOrigin = window.location.origin;
-  const newURL = currentOrigin + newPathname;
-  window.location.href = newURL;
-}
+import { useState } from "react";
 
 export function Form() {
   const { register, handleSubmit } = useForm();
+  const [responseResgister, setResponseResgister] = useState<any>({});
+  const createAccount = useAuth().register;
+
   return (
     <center>
       <h1>Mart</h1>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const res = await apiRegister(data);
-          console.log(res.data);
-          if (res.data.status === 204) navigateRute();
+          const res = await createAccount(data);
+          setResponseResgister(res);
         })}
       >
         <input type="gmail" {...register("gmail")} />
@@ -28,6 +25,7 @@ export function Form() {
         <button type="submit">Register</button>
         <Link href={"/auth/login"}>sign in</Link>
       </form>
+      <p>{responseResgister.error}</p>
     </center>
   );
 }
