@@ -25,7 +25,7 @@ export const ProfileUserProvider = ({ children }: children) => {
 
   const updateProfile = async (data: object) => {
     const res = await apiUpdateProfileData(data);
-    if (res.data.status === 204) {
+    if (res.data.status === 200) {
       await getProfile();
     }
   };
@@ -51,16 +51,12 @@ export const ProfileUserProvider = ({ children }: children) => {
   return (
     <ProfileUserContext.Provider
       value={{
-        //funtions
         getProfile,
         updateProfile,
         changePhoto,
         deletePhoto,
-        //useState
         profilePhoto,
         data,
-        setNewPhoto,
-        newPhoto,
       }}
     >
       {children}
