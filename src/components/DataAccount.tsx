@@ -22,7 +22,6 @@ export function DataAccount() {
       <p>{account ? account.gmail : "Loading..."}</p>
       <Button
         size="sm"
-        color="danger"
         onClick={() => {
           logout();
         }}
@@ -32,6 +31,7 @@ export function DataAccount() {
       <Button
         radius="sm"
         size="sm"
+        color="primary"
         onClick={() => {
           push("/profile");
         }}

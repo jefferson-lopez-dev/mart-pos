@@ -1,9 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useProfile } from "@/hooks/use-profile";
-import { Button } from "@nextui-org/button";
+import { Button, Avatar, Input } from "@nextui-org/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { ImageIcon } from "@radix-ui/react-icons";
 
 interface PropsData {
   data: any;
@@ -42,7 +43,6 @@ export function DataProfile() {
     setValue("last_name", data.lastname);
     setValue("country", data.country);
     setValue("age", data.age);
-    setValue("city", data.city);
     setValue("email", data.email);
   }
 
@@ -53,7 +53,86 @@ export function DataProfile() {
 
   return (
     <div>
-      <h2>Information</h2>
+      <h1>Profile</h1>
+      <div>
+        <Avatar
+          onClick={handleImageClick}
+          className="cursor-pointer"
+          src={data?.profile_picture?.url}
+          size="md"
+          radius="md"
+          isBordered
+          color="primary"
+        />
+        <Button
+          onClick={handleImageClick}
+          size="sm"
+          color="primary"
+          endContent={<ImageIcon />}
+        >
+          Upload photo
+        </Button>
+        <Data data={data.fullName} name="name"></Data>
+        <Data data={data.email} name="email"></Data>
+        <Data data={data.age + " years"} name="age"></Data>
+        <Data data={data.country} name="country"></Data>
+      </div>
+      <br />
+      <h2>Update Profile Data</h2>
+      <form
+        style={{
+          width: "300px",
+        }}
+        className="w-[300px]"
+        onSubmit={handleSubmit((data) => {
+          console.log(data);
+          updateProfile({ ...data, age: Number(data.age) });
+        })}
+      >
+        <Input
+          size="sm"
+          type="text"
+          label="Name"
+          placeholder={data.name}
+          defaultValue={data.name}
+          {...register("name")}
+        />
+        <Input
+          size="sm"
+          type="text"
+          label="Last name"
+          placeholder={data.lastname}
+          defaultValue={data.lastname}
+          {...register("last_name")}
+        />
+        <Input
+          size="sm"
+          type="text"
+          label="Country"
+          placeholder={data.country}
+          defaultValue={data.country}
+          {...register("country")}
+        />
+        <Input
+          size="sm"
+          type="number"
+          label="Age"
+          placeholder={data.age}
+          defaultValue={data.age}
+          {...register("age")}
+        />
+        <Input
+          size="sm"
+          type="Email"
+          label="Email"
+          placeholder={data.email}
+          defaultValue={data.email}
+          {...register("email")}
+        />
+        <Button type="submit" size="sm" color="success">
+          Save
+        </Button>
+      </form>
       <input
         accept="image/*"
         type="file"
@@ -62,62 +141,6 @@ export function DataProfile() {
         ref={inputFileRef}
         onChange={handleFileChange}
       />
-      <div>
-        <img
-          onClick={handleImageClick}
-          width={30}
-          height={30}
-          src={data?.profile_picture?.url}
-          alt="photo profile"
-        />
-        <br />
-        <Data data={data.fullName} name="name"></Data>
-        <Data data={data.email} name="email"></Data>
-        <Data data={data.age + " years"} name="age"></Data>
-        <Data data={data.city} name="city"></Data>
-        <Data data={data.country} name="country"></Data>
-      </div>
-      <br />
-      <h2>Update information</h2>
-      <form
-        onSubmit={handleSubmit((data) => {
-          updateProfile({ ...data, age: Number(data.age) });
-        })}
-      >
-        <div>
-          <label>name</label>
-          <br />
-          <input type="text" {...register("name")} />
-        </div>
-        <div>
-          <label>last name</label>
-          <br />
-          <input type="text" {...register("last_name")} />
-        </div>
-        <div>
-          <label>country</label>
-          <br />
-          <input type="text" {...register("country")} />
-        </div>
-        <div>
-          <label>age</label>
-          <br />
-          <input type="number" {...register("age")} />
-        </div>
-        <div>
-          <label>city</label>
-          <br />
-          <input type="text" {...register("city")} />
-        </div>
-        <div>
-          <label>email</label>
-          <br />
-          <input type="text" {...register("email")} />
-        </div>
-        <Button size="sm" color="success">
-          Save
-        </Button>
-      </form>
     </div>
   );
 }
