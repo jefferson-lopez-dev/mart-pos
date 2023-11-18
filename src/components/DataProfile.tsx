@@ -2,7 +2,7 @@
 "use client";
 
 import { useProfile } from "@/hooks/use-profile";
-import { useEffect } from "react";
+import { createRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface PropsData {
@@ -19,7 +19,14 @@ function Data({ data, name }: PropsData) {
 }
 
 export function DataProfile() {
-  const { data, getProfile, updateProfile } = useProfile();
+  const {
+    data,
+    getProfile,
+    updateProfile,
+    inputFileRef,
+    handleFileChange,
+    handleImageClick,
+  } = useProfile();
   const { register, handleSubmit, setValue } = useForm();
 
   useEffect(() => {
@@ -43,8 +50,17 @@ export function DataProfile() {
   return (
     <div>
       <h2>Information</h2>
+      <input
+        accept="image/*"
+        type="file"
+        capture="environment"
+        style={{ display: "none" }}
+        ref={inputFileRef}
+        onChange={handleFileChange}
+      />
       <div>
         <img
+          onClick={handleImageClick}
           width={30}
           height={30}
           src={data?.profile_picture?.url}
