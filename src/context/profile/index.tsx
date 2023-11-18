@@ -6,14 +6,16 @@ import {
   apiUpdateProfileData,
 } from "@/api";
 import { children } from "@/interface";
-import { createContext, useState } from "react";
+import { createContext, createRef, useEffect, useState } from "react";
 
 export const ProfileUserContext = createContext({});
 
 export const ProfileUserProvider = ({ children }: children) => {
   const [profilePhoto, setProfilePhoto] = useState<any>(false);
   const [data, setData] = useState<any>(false);
-  const [newPhoto, setNewPhoto] = useState({ photo: "" });
+  const [newPhoto, setNewPhoto] = useState<{ photo: File | null }>({
+    photo: null,
+  });
 
   const getProfile = async () => {
     const res = await apiGetProfileData();
@@ -31,12 +33,12 @@ export const ProfileUserProvider = ({ children }: children) => {
   };
 
   const changePhoto = async () => {
-    if (newPhoto.photo === "") return;
+    if (newPhoto.photo === null) return;
     const res = await apiChangeProfilePicture(newPhoto);
     if (res.data.status === 200) {
       await getProfile();
       setNewPhoto({
-        photo: "",
+        photo: null,
       });
     }
   };
@@ -48,6 +50,27 @@ export const ProfileUserProvider = ({ children }: children) => {
     }
   };
 
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = event.target.files && event.target.files[0];
+    setNewPhoto({
+      photo: selectedFile,
+    });
+  };
+
+  const inputFileRef = createRef<HTMLInputElement>();
+  const handleImageClick = () => {
+    if (inputFileRef.current) {
+      inputFileRef.current.click();
+    }
+  };
+
+  useEffect(() => {
+    if (newPhoto.photo !== null) {
+      changePhoto();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [newPhoto]);
+
   return (
     <ProfileUserContext.Provider
       value={{
@@ -55,6 +78,9 @@ export const ProfileUserProvider = ({ children }: children) => {
         updateProfile,
         changePhoto,
         deletePhoto,
+        handleFileChange,
+        handleImageClick,
+        inputFileRef,
         profilePhoto,
         data,
       }}
