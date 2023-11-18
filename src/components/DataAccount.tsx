@@ -2,6 +2,7 @@
 import { useAuth } from "@/hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@nextui-org/button";
 
 export function DataAccount() {
   const { getAccount, account, logout } = useAuth();
@@ -19,20 +20,24 @@ export function DataAccount() {
     <div>
       <h1>Account</h1>
       <p>{account ? account.gmail : "Loading..."}</p>
-      <button
+      <Button
+        size="sm"
+        color="danger"
         onClick={() => {
           logout();
         }}
       >
         Logout
-      </button>
-      <button
+      </Button>
+      <Button
+        radius="sm"
+        size="sm"
         onClick={() => {
           push("/profile");
         }}
       >
         Go to profile
-      </button>
+      </Button>
     </div>
   );
 }
