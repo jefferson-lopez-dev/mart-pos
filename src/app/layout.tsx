@@ -4,7 +4,7 @@ import "@/sass/index.css";
 import { children } from "@/interface";
 
 export const metadata: Metadata = {
-  title: "Mart POS",
+  title: "Mart",
   description: "Mart POS",
 };
 
