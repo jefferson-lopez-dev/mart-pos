@@ -1,11 +1,14 @@
 import { ProfileUserContext } from "@/context";
-import { useContext } from "react";
+import React, { RefObject, useContext } from "react";
 
 interface useProfileProps {
   updateProfile: (data: object) => Promise<any>;
   changePhoto: () => Promise<any>;
   deletePhoto: () => Promise<any>;
   getProfile: () => Promise<any>;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImageClick: () => void;
+  inputFileRef: RefObject<HTMLInputElement>;
   profilePhoto: any;
   data: any;
 }
