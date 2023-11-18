@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
-
 import { useProfile } from "@/hooks/use-profile";
-import { createRef, useEffect } from "react";
+import { Button } from "@nextui-org/button";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
 interface PropsData {
@@ -37,13 +37,17 @@ export function DataProfile() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => {
+  function initializeProfileForm() {
     setValue("name", data.name);
     setValue("last_name", data.lastname);
     setValue("country", data.country);
     setValue("age", data.age);
     setValue("city", data.city);
     setValue("email", data.email);
+  }
+
+  useEffect(() => {
+    initializeProfileForm();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
@@ -110,7 +114,9 @@ export function DataProfile() {
           <br />
           <input type="text" {...register("email")} />
         </div>
-        <button>Save</button>
+        <Button size="sm" color="success">
+          Save
+        </Button>
       </form>
     </div>
   );
