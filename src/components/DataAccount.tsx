@@ -2,6 +2,7 @@
 import { useAuth } from "@/hooks";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { ModeToggle } from "./theme-mode";
 
 export function DataAccount() {
   const { getAccount, account, logout } = useAuth();
@@ -33,6 +34,7 @@ export function DataAccount() {
       >
         Go to profile
       </button>
+      <ModeToggle></ModeToggle>
     </div>
   );
 }
