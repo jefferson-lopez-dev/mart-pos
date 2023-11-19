@@ -17,6 +17,9 @@ dependencies:
   jose:
     specifier: ^5.1.1
     version: 5.1.1
+  lucide:
+    specifier: ^0.292.0
+    version: 0.292.0
   lucide-react:
     specifier: ^0.292.0
     version: 0.292.0(react@18.2.0)
@@ -1743,6 +1746,10 @@ packages:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /lucide@0.292.0:
+    resolution: {integrity: sha512-30r4YbM6nfLiDNzS/YSFLNt/g98XIxBfFwtxF9yYJNpYyAq+iwQx8kM6MWxnh21WuQSkAbEQyru46y5IbCoUjw==}
     dev: false
 
   /merge2@1.4.1:
