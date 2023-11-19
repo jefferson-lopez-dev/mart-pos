@@ -1,9 +1,9 @@
-import { DataAccount } from "../components/DataAccount";
+import { Header } from "../components/organisms/Header";
 
 export default function Home() {
   return (
     <div>
-      <DataAccount></DataAccount>
+      <Header></Header>
     </div>
   );
 }
