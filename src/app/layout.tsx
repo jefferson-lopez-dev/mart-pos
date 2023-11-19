@@ -1,4 +1,4 @@
-import { MartPosProvider } from "../Provider";
+import { MartProvider } from "../Provider";
 import { children } from "@/interface";
 import type { Metadata } from "next";
 import "@/sass/index.css";
@@ -11,9 +11,9 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: children) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <MartPosProvider>{children}</MartPosProvider>
+        <MartProvider>{children}</MartProvider>
       </body>
     </html>
   );

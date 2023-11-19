@@ -1,11 +1,19 @@
 "use client";
 import { AuthProvider, ProfileUserProvider } from "./context";
+import { ThemeProvider } from "@/components/theme-provider";
 import { children } from "./interface";
 
-export function MartPosProvider({ children }: children) {
+export function MartProvider({ children }: children) {
   return (
-    <AuthProvider>
-      <ProfileUserProvider>{children}</ProfileUserProvider>
-    </AuthProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="system"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <AuthProvider>
+        <ProfileUserProvider>{children}</ProfileUserProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
