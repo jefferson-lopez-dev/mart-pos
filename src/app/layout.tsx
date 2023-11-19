@@ -1,8 +1,8 @@
-import { MartPosProvider } from "@/context";
+import { MartPosProvider } from "../Provider";
 import { children } from "@/interface";
 import type { Metadata } from "next";
 import "@/sass/index.css";
-// import "@/sass/tailwind.css";
+import "@/sass/tailwind.css";
 
 export const metadata: Metadata = {
   title: "Mart",

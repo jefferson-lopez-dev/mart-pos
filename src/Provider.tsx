@@ -1,10 +1,6 @@
 "use client";
-import { ReactNode } from "react";
-import { AuthProvider, ProfileUserProvider } from "./";
-
-interface children {
-  children: ReactNode;
-}
+import { AuthProvider, ProfileUserProvider } from "./context";
+import { children } from "./interface";
 
 export function MartPosProvider({ children }: children) {
   return (

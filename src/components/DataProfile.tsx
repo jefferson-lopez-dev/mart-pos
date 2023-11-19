@@ -34,6 +34,7 @@ export function DataProfile() {
       <div>
         <div>
           <img
+            onClick={handleImageClick}
             width={50}
             height={50}
             alt="photo"
