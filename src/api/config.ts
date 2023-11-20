@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const auth = axios.create({
-  baseURL: "http://localhost:3013/api",
+  baseURL: "https://mart-api-auth.vercel.app/api",
   withCredentials: true,
 });
 
