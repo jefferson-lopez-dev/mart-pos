@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 export function Logo() {
-  const { theme, systemTheme } = useTheme();
+  const { theme, systemTheme, setTheme } = useTheme();
   const { push } = useRouter();
   const [logo, setLogo] = useState("/mart-light.png");
 
@@ -23,7 +23,7 @@ export function Logo() {
   return (
     <Image
       className="cursor-pointer absolute left-4 top-4"
-      onClick={() => push("/")}
+      onClick={() => (theme === "light" ? setTheme("dark") : setTheme("light"))}
       src={logo}
       alt="photo"
       width={35}
