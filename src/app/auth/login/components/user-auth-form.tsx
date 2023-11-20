@@ -13,15 +13,13 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { register, handleSubmit } = useForm();
-  const auth = useAuth();
+  const { login } = useAuth();
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const res = await auth.register(data);
-          console.log(res);
-          console.log(data);
+          await login(data);
         })}
       >
         <div className="grid gap-2">
