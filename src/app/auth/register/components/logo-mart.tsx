@@ -1,13 +1,11 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
 export function Logo() {
-  const { theme, systemTheme, setTheme } = useTheme();
-  const { push } = useRouter();
+  const { theme, systemTheme, resolvedTheme } = useTheme();
   const [logo, setLogo] = useState("/mart-light.png");
 
   useEffect(() => {
@@ -23,7 +21,6 @@ export function Logo() {
   return (
     <Image
       className="cursor-pointer absolute left-4 top-4"
-      onClick={() => (theme === "light" ? setTheme("dark") : setTheme("light"))}
       src={logo}
       alt="photo"
       width={35}
