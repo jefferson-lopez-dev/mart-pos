@@ -26,6 +26,7 @@ export const AuthProvider = ({ children }: children) => {
 
   const login = async (data: object) => {
     const res = await apiLogin(data);
+    console.log(res);
     if (res.data.status === 204) {
       setIsAuthenticated("true");
       if (isAuthenticated) push("/");
@@ -35,13 +36,16 @@ export const AuthProvider = ({ children }: children) => {
   };
 
   const register = async (data: object) => {
+    console.log("resgister");
     const res = await apiRegister(data);
+    console.log("resgister", res);
     if (res.data.status === 204) {
       setIsAuthenticated("true");
       if (isAuthenticated) push("/");
       else push("/auth/login");
     }
     return res.data;
+    console.log(res.data);
   };
 
   const logout = async () => {
@@ -55,12 +59,14 @@ export const AuthProvider = ({ children }: children) => {
 
   const verifyToken = async () => {
     const res = await apiVerifyToken();
+    console.log(res);
     setIsAuthenticated("true");
     return res.data;
   };
 
   const getAccount = async () => {
     const res = await apiGetAccount();
+    console.log(res);
     setAccount(res.data.account);
     return res.data;
   };
@@ -73,7 +79,7 @@ export const AuthProvider = ({ children }: children) => {
     async function checkToken() {
       const { TK_AWGAP } = Cookie.get();
       const res = await verifyToken();
-
+      console.log("res", res);
       if (!TK_AWGAP) setIsAuthenticated("false");
       if (!res) setIsAuthenticated("false");
       setIsAuthenticated("true");
