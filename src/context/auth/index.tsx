@@ -36,16 +36,13 @@ export const AuthProvider = ({ children }: children) => {
   };
 
   const register = async (data: object) => {
-    console.log("resgister");
     const res = await apiRegister(data);
-    console.log("resgister", res);
     if (res.data.status === 204) {
       setIsAuthenticated("true");
       if (isAuthenticated) push("/");
-      else push("/auth/login");
+      else push("/auth/register");
     }
     return res.data;
-    console.log(res.data);
   };
 
   const logout = async () => {
@@ -57,16 +54,18 @@ export const AuthProvider = ({ children }: children) => {
     return res.data.message;
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const verifyToken = async () => {
-    const res = await apiVerifyToken();
-    console.log(res);
-    setIsAuthenticated("true");
-    return res.data;
+    if (isAuthenticated) {
+      const res = await apiVerifyToken();
+      if (res.data.status === 401) setIsAuthenticated("false");
+      else setIsAuthenticated("true");
+      return res.data;
+    }
   };
 
   const getAccount = async () => {
     const res = await apiGetAccount();
-    console.log(res);
     setAccount(res.data.account);
     return res.data;
   };
@@ -76,15 +75,17 @@ export const AuthProvider = ({ children }: children) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
+    const TK_AWGAP = Cookie.get();
     async function checkToken() {
-      const { TK_AWGAP } = Cookie.get();
-      const res = await verifyToken();
-      console.log("res", res);
-      if (!TK_AWGAP) setIsAuthenticated("false");
-      if (!res) setIsAuthenticated("false");
-      setIsAuthenticated("true");
+      // console.log(TK_AWGAP);
+      // if (!TK_AWGAP) {
+      //   setIsAuthenticated("false");
+      //   return;
+      // }
+      await verifyToken();
     }
     checkToken();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated]);
 
   const contextValues = {
