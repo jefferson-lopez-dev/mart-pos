@@ -5,6 +5,8 @@ import { jwtVerify } from "jose";
 export async function middleware(request: NextRequest) {
   const jwt = request.cookies.get("TK_AWGAP");
 
+  console.log(jwt);
+
   if (!jwt) {
     if (
       request.nextUrl.pathname === "/auth/login" ||
