@@ -75,13 +75,7 @@ export const AuthProvider = ({ children }: children) => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    const TK_AWGAP = Cookie.get();
     async function checkToken() {
-      // console.log(TK_AWGAP);
-      // if (!TK_AWGAP) {
-      //   setIsAuthenticated("false");
-      //   return;
-      // }
       await verifyToken();
     }
     checkToken();

@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
   try {
     const { payload } = await jwtVerify(
       jwt.value,
-      new TextEncoder().encode("some secret key")
+      new TextEncoder().encode("jeffersonjwtsecret")
     );
 
     if (request.nextUrl.pathname === "/") {

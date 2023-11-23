@@ -1,7 +1,10 @@
 import axios from "axios";
 
+const url_local = "http://localhost:3030/api";
+const url_serve = "https://api-mart-auth.onrender.com/api";
+
 export const auth = axios.create({
-  baseURL: "https://api-mart-auth.onrender.com/api",
+  baseURL: url_serve,
   withCredentials: true,
 });
 
