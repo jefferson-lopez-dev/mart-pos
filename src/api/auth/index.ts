@@ -1,13 +1,11 @@
 import { auth } from "../config";
 
 export const apiLogin = async (data: object) => {
-  return await auth.post("login", data, {
-    withCredentials: true,
-  });
+  return await auth.post("login", data, { withCredentials: true });
 };
 
 export const apiRegister = async (data: object) => {
-  return await auth.post("register", data);
+  return await auth.post("register", data, { withCredentials: true });
 };
 
 export const apiLogout = async () => {
