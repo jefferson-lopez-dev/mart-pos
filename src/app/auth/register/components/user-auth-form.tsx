@@ -21,20 +21,20 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     <div className={cn("grid gap-6", className)} {...props}>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const { user } = await auth.register(data);
+          const { email } = await auth.register(data);
           const res = await signIn("credentials", {
-            email: user.email,
+            email: email,
             password: data.password,
             redirect: false,
           });
-          if (res?.error) return;
+          if (res?.error) return console.log("error");
           if (res?.ok) return push("/");
         })}
       >
         <div className="grid gap-2">
           <div className="grid gap-4">
             <div>
-              <Label htmlFor="email">Full Name</Label>
+              <Label htmlFor="fullname">Full Name</Label>
               <Input
                 placeholder="your name completed"
                 type="fullname"
