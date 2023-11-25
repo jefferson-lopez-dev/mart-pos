@@ -11,14 +11,14 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "@/hooks";
 import { useProfile } from "@/hooks/use-profile";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useEffect } from "react";
 
 export function UserNav() {
-  const { logout, account } = useAuth();
-  const { getProfile, data, profilePhoto } = useProfile();
+  const { data: session }: any = useSession();
+  const { getProfile, profilePhoto } = useProfile();
 
   useEffect(() => {
     getProfile();
@@ -38,9 +38,11 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">{data.name}</p>
+            <p className="text-sm font-medium leading-none">
+              {session?.user?.fullname}
+            </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {account.gmail}
+              {session?.user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
@@ -60,7 +62,7 @@ export function UserNav() {
         <DropdownMenuSeparator />
         <DropdownMenuItem
           onClick={() => {
-            logout();
+            signOut();
           }}
         >
           Log out

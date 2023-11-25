@@ -1,25 +1,14 @@
 "use client";
-import { useAuth } from "@/hooks";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ModeToggle } from "../theme/theme-mode";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { useTheme } from "next-themes";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "../ui/navigation-menu";
-import Link from "next/link";
 import { MainNav } from "../main-nav";
 import { Search } from "../search";
 import { UserNav } from "../user-nav";
 import Image from "next/image";
 
 export function Header() {
-  const { getAccount } = useAuth();
   const { push } = useRouter();
   const { theme, systemTheme } = useTheme();
   const [logo, setLogo] = useState("/mart-light.png");
@@ -34,14 +23,6 @@ export function Header() {
     }
     logoMart();
   }, [theme, systemTheme]);
-
-  useEffect(() => {
-    function fetchData() {
-      getAccount();
-    }
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div>
