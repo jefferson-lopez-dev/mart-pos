@@ -4,7 +4,7 @@ import {
   apiDeleteProfilePicture,
   apiGetProfileData,
   apiUpdateProfileData,
-} from "@/api";
+} from "@/endpoint";
 import { children } from "@/interface";
 import { createContext, createRef, useEffect, useState } from "react";
 
