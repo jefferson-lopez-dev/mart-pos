@@ -1,31 +1,46 @@
 "use client";
 
 import * as React from "react";
-
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { register, handleSubmit } = useForm();
   const auth = useAuth();
+  const { push } = useRouter();
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const res = await auth.register(data);
-          console.log(res);
-          console.log(data);
+          const { user } = await auth.register(data);
+          const res = await signIn("credentials", {
+            email: user.email,
+            password: data.password,
+            redirect: false,
+          });
+          if (res?.error) return;
+          if (res?.ok) return push("/");
         })}
       >
         <div className="grid gap-2">
           <div className="grid gap-4">
+            <div>
+              <Label htmlFor="email">Full Name</Label>
+              <Input
+                placeholder="your name completed"
+                type="fullname"
+                {...register("fullname")}
+              />
+            </div>
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -34,7 +49,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
                 autoCapitalize="none"
                 autoComplete="email"
                 autoCorrect="off"
-                {...register("gmail")}
+                {...register("email")}
               />
             </div>
             <div>
