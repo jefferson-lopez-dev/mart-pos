@@ -41,7 +41,6 @@ export async function POST(request: Request) {
       id: savedUser._id,
     });
   } catch (error) {
-    console.log(error);
     if (error instanceof Error) {
       return NextResponse.json({ message: error.message }, { status: 400 });
     }

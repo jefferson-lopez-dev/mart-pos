@@ -2,7 +2,7 @@ import { AuthContext } from "@/context";
 import { useContext } from "react";
 
 interface AuthContextProps {
-  register: (data: object) => Promise<any>;
+  signUpCredentials: (data: object) => Promise<any>;
 }
 
 export const useAuth = () => {

@@ -7,13 +7,14 @@ import { apiRegister } from "@/endpoint";
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }: children) => {
-  const register = async (data: object) => {
+  const signUpCredentials = async (data: object) => {
     const res = await apiRegister(data);
+    console.log(res.data);
     return res.data;
   };
 
   const contextValues = {
-    register,
+    signUpCredentials,
   };
 
   return (

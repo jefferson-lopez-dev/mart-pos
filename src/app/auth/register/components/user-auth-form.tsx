@@ -14,19 +14,20 @@ interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
   const { register, handleSubmit } = useForm();
-  const auth = useAuth();
+  const { signUpCredentials } = useAuth();
   const { push } = useRouter();
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
       <form
         onSubmit={handleSubmit(async (data) => {
-          const { email } = await auth.register(data);
+          const { email } = await signUpCredentials(data);
           const res = await signIn("credentials", {
             email: email,
             password: data.password,
             redirect: false,
           });
+          console.log(res);
           if (res?.error) return console.log("error");
           if (res?.ok) return push("/");
         })}
