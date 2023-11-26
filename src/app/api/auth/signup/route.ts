@@ -36,7 +36,6 @@ export async function POST(request: Request) {
       message: "OK",
       fullname: savedUser.fullname,
       email: savedUser.email,
-      password: savedUser.password,
       id: savedUser._id,
     });
   } catch (error) {

@@ -24,7 +24,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             password: data.password,
             redirect: false,
           });
-          console.log(res);
           if (res?.error) return;
           if (res?.ok) return push("/");
         })}
