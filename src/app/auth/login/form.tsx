@@ -34,6 +34,11 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
     }
+    if (res?.ok)
+      toast({
+        title: "Welcome to Mart",
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
     if (res?.ok) return push("/");
   };
 

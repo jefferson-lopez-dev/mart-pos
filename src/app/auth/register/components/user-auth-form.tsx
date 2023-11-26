@@ -40,13 +40,13 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
         description: "Sing In your account",
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
-      return;
     }
     const res = await signIn("credentials", {
       email: resonseSignUp.email,
       password: data.password,
       redirect: false,
     });
+    console.log(res);
     if (res?.error) {
       setLoading(false);
       toast({
