@@ -7,9 +7,13 @@ export async function POST(request: Request) {
   try {
     await connectDB();
     const { email, password, fullname } = await request.json();
-
+    return NextResponse.json({
+      message: "OK",
+      fullname,
+      email,
+      password,
+    });
     const userFound = await User.findOne({ email });
-    return NextResponse.json(userFound);
 
     if (!password || password.length < 6) {
       return NextResponse.json({
