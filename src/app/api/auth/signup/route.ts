@@ -5,15 +5,17 @@ import bcrypt from "bcryptjs";
 
 export async function POST(request: Request) {
   try {
-    // await connectDB();
+    await connectDB();
     const { email, password, fullname } = await request.json();
+    const userFound = await User.findOne({ email });
+
     return NextResponse.json({
       message: "OK",
       fullname,
       email,
       password,
+      userFound,
     });
-    const userFound = await User.findOne({ email });
 
     if (!password || password.length < 6) {
       return NextResponse.json({
