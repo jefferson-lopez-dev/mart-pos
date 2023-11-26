@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,22 +10,34 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
+import { Loader2 } from "lucide-react";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function FormLogin({ className, ...props }: UserAuthFormProps) {
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { push } = useRouter();
   const { toast } = useToast();
 
   const handleSignIn = async (data: any) => {
+    setLoading(true);
     const res = await signIn("credentials", {
       email: data.email,
       password: data.password,
       redirect: false,
     });
-    if (res?.error) return;
-    if (res?.ok) return push("/");
+    if (res?.error) {
+      setLoading(false);
+      toast({
+        title: res?.error,
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+    }
+    if (res?.ok) {
+      setLoading(false);
+      push("/");
+    }
   };
 
   return (
@@ -57,8 +69,9 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
             </div>
           </div>
           <br />
-          <Button variant="default" type="submit">
-            Login
+          <Button disabled={loading} size="lg" variant="default" type="submit">
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading ? "Loading..." : "Login"}
           </Button>
         </div>
       </form>
@@ -73,10 +86,10 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
         </div>
       </div>
       <Button
+        size="lg"
         onClick={() => {
           toast({
-            title: "Ups! Comming Soon ⚠️",
-            description: "This function will be added soon",
+            title: "Ups! Comming Soon",
             action: (
               <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
             ),

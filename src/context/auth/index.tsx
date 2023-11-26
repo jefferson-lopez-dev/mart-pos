@@ -9,7 +9,6 @@ export const AuthContext = createContext({});
 export const AuthProvider = ({ children }: children) => {
   const signUpCredentials = async (data: object) => {
     const res = await apiRegister(data);
-    console.log(res.data);
     return res.data;
   };
 

@@ -9,16 +9,23 @@ export async function POST(request: Request) {
     const { email, password, fullname } = await request.json();
     const userFound = await User.findOne({ email });
 
-    if (!password || password.length < 6) {
+    if (fullname === "") {
       return NextResponse.json({
-        message: "Password must be at least 6 characters",
-        status: 400,
+        message: "Full name is required",
+        status: 409,
       });
     }
 
     if (userFound) {
       return NextResponse.json({
         message: "Email already exists",
+        status: 409,
+      });
+    }
+
+    if (!password || password.length < 6) {
+      return NextResponse.json({
+        message: "Password must be at least 6 characters",
         status: 409,
       });
     }

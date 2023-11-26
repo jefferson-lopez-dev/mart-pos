@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,28 +9,49 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
+import { ToastAction } from "@/components/ui/toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+  const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
   const { signUpCredentials } = useAuth();
   const { push } = useRouter();
+  const { toast } = useToast();
+
+  const handleSignUp = async (data: any) => {
+    setLoading(true);
+    const resonseSignUp = await signUpCredentials(data);
+    if (resonseSignUp.status === 409) {
+      setLoading(false);
+      toast({
+        title: resonseSignUp.message,
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+      return;
+    }
+    const res = await signIn("credentials", {
+      email: resonseSignUp.email,
+      password: data.password,
+      redirect: false,
+    });
+    if (res?.error) {
+      setLoading(false);
+      toast({
+        title: res?.error,
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+      return;
+    }
+    if (res?.ok) push("/");
+  };
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const { email } = await signUpCredentials(data);
-          const res = await signIn("credentials", {
-            email: email,
-            password: data.password,
-            redirect: false,
-          });
-          if (res?.error) return console.log("error");
-          if (res?.ok) return push("/");
-        })}
-      >
+      <form onSubmit={handleSubmit(handleSignUp)}>
         <div className="grid gap-2">
           <div className="grid gap-4">
             <div>
@@ -46,9 +67,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <Input
                 placeholder="name@example.com"
                 type="email"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
                 {...register("email")}
               />
             </div>
@@ -57,15 +75,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               <Input
                 placeholder="**********"
                 type="password"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
                 {...register("password")}
               />
             </div>
           </div>
           <br />
-          <Button type="submit">Create Account</Button>
+          <Button disabled={loading} size="lg" variant="default" type="submit">
+            {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            {loading ? "Creating account..." : "Create Account"}
+          </Button>
         </div>
       </form>
       <div className="relative">
@@ -73,10 +91,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">Or</span>
+          <span className="bg-background px-2 text-muted-foreground">
+            Or register with
+          </span>
         </div>
       </div>
-      <Button className="gap-2" variant="outline" type="button">
+      <Button
+        onClick={() => {
+          toast({
+            title: "Ups! Comming Soon",
+            action: (
+              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+            ),
+          });
+        }}
+        size="lg"
+        className="gap-2"
+        variant="outline"
+        type="button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
