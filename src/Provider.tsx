@@ -5,6 +5,7 @@ import { children } from "./interface";
 import { Header } from "./components/organisms/Header";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
+import { Toaster } from "@/components/ui/toaster";
 
 export function MartProvider({ children }: children) {
   const path = usePathname();
@@ -21,6 +22,7 @@ export function MartProvider({ children }: children) {
             {path === "/" && <Header />}
             {path === "/profile" && <Header />}
             {children}
+            <Toaster />
           </ProfileUserProvider>
         </AuthProvider>
       </ThemeProvider>

@@ -6,41 +6,33 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
-import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function FormLogin({ className, ...props }: UserAuthFormProps) {
   const { register, handleSubmit } = useForm();
-  const { signUpCredentials } = useAuth();
   const { push } = useRouter();
+  const { toast } = useToast();
+
+  const handleSignIn = async (data: any) => {
+    const res = await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+      redirect: false,
+    });
+    if (res?.error) return;
+    if (res?.ok) return push("/");
+  };
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          const { email } = await signUpCredentials(data);
-          const res = await signIn("credentials", {
-            email: email,
-            password: data.password,
-            redirect: false,
-          });
-          if (res?.error) return console.log("error");
-          if (res?.ok) return push("/");
-        })}
-      >
+      <form onSubmit={handleSubmit(handleSignIn)}>
         <div className="grid gap-2">
           <div className="grid gap-4">
-            <div>
-              <Label htmlFor="fullname">Full Name</Label>
-              <Input
-                placeholder="your name completed"
-                type="fullname"
-                {...register("fullname")}
-              />
-            </div>
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
@@ -53,7 +45,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
               />
             </div>
             <div>
-              <Label htmlFor="email">Password</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 placeholder="**********"
                 type="password"
@@ -65,7 +57,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             </div>
           </div>
           <br />
-          <Button type="submit">Create Account</Button>
+          <Button variant="default" type="submit">
+            Login
+          </Button>
         </div>
       </form>
       <div className="relative">
@@ -73,10 +67,25 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
           <span className="w-full border-t" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-background px-2 text-muted-foreground">Or</span>
+          <span className="bg-background px-2 text-muted-foreground">
+            Or continue with
+          </span>
         </div>
       </div>
-      <Button className="gap-2" variant="outline" type="button">
+      <Button
+        onClick={() => {
+          toast({
+            title: "Ups! Comming Soon ⚠️",
+            description: "This function will be added soon",
+            action: (
+              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
+            ),
+          });
+        }}
+        className="gap-2"
+        variant="outline"
+        type="button"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           x="0px"
@@ -102,7 +111,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
             d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
           ></path>
         </svg>
-        Register with Google
+        Continue with Google
       </Button>
     </div>
   );
