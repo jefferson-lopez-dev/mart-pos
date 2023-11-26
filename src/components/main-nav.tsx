@@ -22,7 +22,7 @@ export function MainNav({
         Home
       </Link>
       <Link
-        href="/sales"
+        href="/"
         className={`break-normal text-sm font-medium ${
           pn !== "/sales" && "text-muted-foreground"
         } transition-colors hover:text-primary`}
@@ -30,7 +30,7 @@ export function MainNav({
         Sales
       </Link>
       <Link
-        href="/inventory"
+        href="/"
         className={`break-normal text-sm font-medium ${
           pn !== "/inventory" && "text-muted-foreground"
         } transition-colors hover:text-primary`}
@@ -38,7 +38,7 @@ export function MainNav({
         Inventory
       </Link>
       <Link
-        href="/profile"
+        href="/"
         className={`break-normal text-sm font-medium ${
           pn !== "/profile" && "text-muted-foreground"
         } transition-colors hover:text-primary`}

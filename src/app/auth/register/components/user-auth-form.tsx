@@ -46,7 +46,6 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       password: data.password,
       redirect: false,
     });
-    console.log(res);
     if (res?.error) {
       setLoading(false);
       toast({
