@@ -46,7 +46,7 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
       return;
     }
-    if (res?.ok) push("/");
+    if (res?.ok) return push("/");
   };
 
   return (

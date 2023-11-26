@@ -34,10 +34,7 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
     }
-    if (res?.ok) {
-      setLoading(false);
-      push("/");
-    }
+    if (res?.ok) return push("/");
   };
 
   return (
