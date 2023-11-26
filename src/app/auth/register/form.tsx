@@ -6,66 +6,83 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
+import { useAuth } from "@/hooks";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
-import { ToastAction } from "@/components/ui/toast";
 import { Loader2 } from "lucide-react";
+import { ToastAction } from "@/components/ui/toast";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
-export function FormLogin({ className, ...props }: UserAuthFormProps) {
+export function FormRegister({ className, ...props }: UserAuthFormProps) {
   const [loading, setLoading] = useState(false);
   const { register, handleSubmit } = useForm();
+  const { signUpCredentials } = useAuth();
   const { push } = useRouter();
   const { toast } = useToast();
 
-  const handleSignIn = async (data: any) => {
+  const handleSignUp = async (data: any) => {
     setLoading(true);
+    const resonseSignUp = await signUpCredentials(data);
+    if (resonseSignUp.status === 409) {
+      setLoading(false);
+      toast({
+        title: `🟡 ${resonseSignUp.message}`,
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+      return;
+    }
+
+    if (resonseSignUp.status === 204) {
+      toast({
+        title: `🟢 ${resonseSignUp.message}`,
+        description: "Sing In your account",
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+    }
     const res = await signIn("credentials", {
-      email: data.email,
+      email: resonseSignUp.email,
       password: data.password,
       redirect: false,
     });
     if (res?.error) {
       setLoading(false);
       toast({
-        title: `🔴 ${res?.error}`,
+        title: res?.error,
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
+      return;
     }
-    if (res?.ok)
-      toast({
-        title: "🟢 Welcome to Mart",
-        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-      });
     if (res?.ok) return push("/");
   };
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>
-      <form onSubmit={handleSubmit(handleSignIn)}>
+      <form onSubmit={handleSubmit(handleSignUp)}>
         <div className="grid gap-2">
           <div className="grid gap-4">
+            <div>
+              <Label htmlFor="fullname">Full Name</Label>
+              <Input
+                placeholder="your name completed"
+                type="fullname"
+                {...register("fullname")}
+              />
+            </div>
             <div>
               <Label htmlFor="email">Email</Label>
               <Input
                 placeholder="name@example.com"
                 type="email"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
                 {...register("email")}
               />
             </div>
             <div>
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="email">Password</Label>
               <Input
                 placeholder="**********"
                 type="password"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
                 {...register("password")}
               />
             </div>
@@ -73,7 +90,7 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
           <br />
           <Button disabled={loading} size="lg" variant="default" type="submit">
             {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            {loading ? "Loading..." : "Login"}
+            {loading ? "Creating account..." : "Create Account"}
           </Button>
         </div>
       </form>
@@ -83,12 +100,11 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Or continue with
+            Or register with
           </span>
         </div>
       </div>
       <Button
-        size="lg"
         onClick={() => {
           toast({
             title: "Ups! Comming Soon",
@@ -97,6 +113,7 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
             ),
           });
         }}
+        size="lg"
         className="gap-2"
         variant="outline"
         type="button"
@@ -126,7 +143,7 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
             d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"
           ></path>
         </svg>
-        Continue with Google
+        Register with Google
       </Button>
     </div>
   );
