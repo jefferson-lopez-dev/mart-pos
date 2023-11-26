@@ -2,7 +2,7 @@
 import { AuthProvider, ProfileUserProvider } from "./context";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { children } from "./interface";
-import { Header } from "./components/organisms/Header";
+import { HeaderPage } from "./components/header-page";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
@@ -19,8 +19,8 @@ export function MartProvider({ children }: children) {
       >
         <AuthProvider>
           <ProfileUserProvider>
-            {path === "/" && <Header />}
-            {path === "/profile" && <Header />}
+            {path === "/" && <HeaderPage />}
+            {path === "/profile" && <HeaderPage />}
             {children}
             <Toaster />
           </ProfileUserProvider>
