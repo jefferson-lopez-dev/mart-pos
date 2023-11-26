@@ -9,6 +9,7 @@ export async function POST(request: Request) {
     const { email, password, fullname } = await request.json();
 
     const userFound = await User.findOne({ email });
+    return NextResponse.json(userFound);
 
     if (!password || password.length < 6) {
       return NextResponse.json({
