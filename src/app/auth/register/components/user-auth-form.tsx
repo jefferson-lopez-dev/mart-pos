@@ -22,14 +22,14 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       <form
         onSubmit={handleSubmit(async (data) => {
           const { email } = await signUpCredentials(data);
-          const res = await signIn("credentials", {
-            email: email,
-            password: data.password,
-            redirect: false,
-          });
-          console.log(res);
-          if (res?.error) return console.log("error");
-          if (res?.ok) return push("/");
+          // const res = await signIn("credentials", {
+          //   email: email,
+          //   password: data.password,
+          //   redirect: false,
+          // });
+          // console.log(res);
+          // if (res?.error) return console.log("error");
+          // if (res?.ok) return push("/");
         })}
       >
         <div className="grid gap-2">
