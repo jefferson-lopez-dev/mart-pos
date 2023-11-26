@@ -40,7 +40,8 @@ export async function POST(request: Request) {
     const savedUser = await user.save();
 
     return NextResponse.json({
-      message: "OK",
+      status: 204,
+      message: "Account created successfully",
       fullname: savedUser.fullname,
       email: savedUser.email,
       id: savedUser._id,

@@ -33,6 +33,15 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       });
       return;
     }
+
+    if (resonseSignUp.status === 204) {
+      toast({
+        title: `✅${resonseSignUp.message}`,
+        description: "Sing In your account",
+        action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+      });
+      return;
+    }
     const res = await signIn("credentials", {
       email: resonseSignUp.email,
       password: data.password,
