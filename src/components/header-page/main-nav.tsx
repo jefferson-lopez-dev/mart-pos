@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
+import { Button } from "../ui/button";
 
 export function MainNav({
   className,
@@ -13,13 +14,23 @@ export function MainNav({
       className={cn("flex items-center space-x-4 lg:space-x-6", className)}
       {...props}
     >
+      <Button size="sm" asChild>
+        <Link
+          href="/"
+          className={`break-normal text-sm font-medium ${
+            pn !== "/" && "text-muted-foreground"
+          } transition-colors`}
+        >
+          Check in
+        </Link>
+      </Button>
       <Link
         href="/"
         className={`break-normal text-sm font-medium ${
-          pn !== "/" && "text-muted-foreground"
+          pn !== "/Overview" && "text-muted-foreground"
         } transition-colors hover:text-primary`}
       >
-        Home
+        Overview
       </Link>
       <Link
         href="/"

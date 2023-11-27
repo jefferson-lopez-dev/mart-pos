@@ -22,8 +22,11 @@ export function UserNav() {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage alt="@shadcn" />
-            <AvatarFallback>PR</AvatarFallback>
+            <AvatarImage
+              src="https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
+              alt="@martpos"
+            />
+            <AvatarFallback>MP</AvatarFallback>
           </Avatar>
         </Button>
       </DropdownMenuTrigger>
@@ -40,16 +43,14 @@ export function UserNav() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
+          <DropdownMenuItem>Dashboard</DropdownMenuItem>
           <Link href={"/profile"}>
             <DropdownMenuItem>
               Profile
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
           </Link>
-          <DropdownMenuItem>
-            Settings
-            <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-          </DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

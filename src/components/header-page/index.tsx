@@ -27,19 +27,23 @@ export function HeaderPage() {
   return (
     <div>
       <div className="border-b">
-        <div className="flex h-[60px] items-center px-4">
-          <Image
-            className="cursor-pointer"
-            onClick={() => push("/")}
-            src={logo}
-            alt="photo"
-            width={35}
-            height={35}
-          />
-          <MainNav className="mx-6" />
-          <div className="ml-auto flex items-center space-x-4">
-            <Search />
-            <UserNav />
+        <div className="flex h-[80px] m-3 flex-col justify-around">
+          <div className="flex">
+            <Image
+              className="h-[30px] w-[30px] cursor-pointer"
+              onClick={() => push("/")}
+              src={logo}
+              alt="photo"
+              width={35}
+              height={35}
+            />
+            <div className="ml-auto flex items-center space-x-4">
+              <Search />
+              <UserNav />
+            </div>
+          </div>
+          <div className="flex">
+            <MainNav className="" />
           </div>
         </div>
       </div>
