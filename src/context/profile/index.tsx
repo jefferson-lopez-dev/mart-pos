@@ -17,8 +17,8 @@ export const ProfileUserProvider = ({ children }: children) => {
     photo: null,
   });
 
-  const getProfile = async (id: string | number) => {
-    const res = await apiGetProfileData(id);
+  const getProfile = async (id: string) => {
+    const res = await apiGetProfileData({ id });
     if (res.data.status === 204) {
       setData(res.data.creds_profile);
       setProfilePhoto(res.data.creds_profile.picture.url);
