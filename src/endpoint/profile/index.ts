@@ -7,8 +7,12 @@ const header = {
   },
 };
 
-export const apiGetProfileData = async (id: string | number) => {
-  return await profile.post("", id);
+interface DataGetProfile {
+  id: string;
+}
+
+export const apiGetProfileData = async (data: DataGetProfile) => {
+  return await profile.post("", data);
 };
 
 export const apiUpdateProfileData = async (data: UpdateDataProfile) => {

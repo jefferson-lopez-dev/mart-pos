@@ -1,6 +1,11 @@
 import axios from "axios";
 
+const { API_LOCAL_URL, API_PRODUCTION_URL } = process.env;
+
+if (!API_PRODUCTION_URL || !API_LOCAL_URL)
+  throw new Error("URL APIs is not available");
+
 export const profile = axios.create({
-  baseURL: "https://api-mart-profile.onrender.com/api/creds_profile",
+  baseURL: API_PRODUCTION_URL,
   withCredentials: true,
 });
