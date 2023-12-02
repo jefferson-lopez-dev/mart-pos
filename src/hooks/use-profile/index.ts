@@ -5,7 +5,7 @@ interface useProfileProps {
   updateProfile: (data: object) => Promise<any>;
   changePhoto: () => Promise<any>;
   deletePhoto: () => Promise<any>;
-  getProfile: () => Promise<any>;
+  getProfile: (id: string | number) => Promise<any>;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleImageClick: () => void;
   inputFileRef: RefObject<HTMLInputElement>;

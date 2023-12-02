@@ -17,26 +17,23 @@ export const ProfileUserProvider = ({ children }: children) => {
     photo: null,
   });
 
-  const getProfile = async () => {
-    const res = await apiGetProfileData();
+  const getProfile = async (id: string | number) => {
+    const res = await apiGetProfileData(id);
     if (res.data.status === 204) {
-      setData(res.data.data_user);
-      setProfilePhoto(res.data.data_user.profile_picture.url);
+      setData(res.data.creds_profile);
+      setProfilePhoto(res.data.creds_profile.picture.url);
     }
+    return res.data;
   };
 
   const updateProfile = async (data: object) => {
-    const res = await apiUpdateProfileData(data);
-    if (res.data.status === 200) {
-      await getProfile();
-    }
+    await apiUpdateProfileData(data);
   };
 
   const changePhoto = async () => {
     if (newPhoto.photo === null) return;
     const res = await apiChangeProfilePicture(newPhoto);
     if (res.data.status === 200) {
-      await getProfile();
       setNewPhoto({
         photo: null,
       });
@@ -44,10 +41,7 @@ export const ProfileUserProvider = ({ children }: children) => {
   };
 
   const deletePhoto = async () => {
-    const res = await apiDeleteProfilePicture();
-    if (res.data.status === 200) {
-      await getProfile();
-    }
+    await apiDeleteProfilePicture();
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

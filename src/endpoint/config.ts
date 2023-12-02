@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const profile = axios.create({
-  baseURL: "http://localhost:3014/api",
+  baseURL: "https://api-mart-profile.onrender.com/api/creds_profile",
   withCredentials: true,
 });

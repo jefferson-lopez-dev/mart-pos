@@ -1,12 +1,18 @@
 import { profile } from "../config";
 import { UpdateDataProfile } from "./types";
 
-export const apiGetProfileData = async () => {
-  return await profile.get("/user/profile");
+const header = {
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+};
+
+export const apiGetProfileData = async (id: string | number) => {
+  return await profile.post("", id);
 };
 
 export const apiUpdateProfileData = async (data: UpdateDataProfile) => {
-  return await profile.put("/user/profile", data);
+  return await profile.put("", data);
 };
 
 export const apiChangeProfilePicture = async (data: any) => {
@@ -14,13 +20,9 @@ export const apiChangeProfilePicture = async (data: any) => {
   for (let key in data) {
     form.append(key, data[key]);
   }
-  return await profile.put("/user/profile/photo", form, {
-    headers: {
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return await profile.put("/picture", form, header);
 };
 
 export const apiDeleteProfilePicture = async () => {
-  return await profile.delete("/user/profile/photo");
+  return await profile.delete("/picture");
 };

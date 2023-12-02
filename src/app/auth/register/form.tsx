@@ -28,7 +28,7 @@ export function FormRegister({ className, ...props }: UserAuthFormProps) {
     if (resonseSignUp.status === 409) {
       setLoading(false);
       toast({
-        title: `🟡 ${resonseSignUp.message}`,
+        title: `${resonseSignUp.message}`,
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
       return;
@@ -36,7 +36,7 @@ export function FormRegister({ className, ...props }: UserAuthFormProps) {
 
     if (resonseSignUp.status === 204) {
       toast({
-        title: `🟢 ${resonseSignUp.message}`,
+        title: `${resonseSignUp.message}`,
         description: "Sing In your account",
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
