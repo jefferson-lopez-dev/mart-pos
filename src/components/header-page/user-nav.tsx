@@ -29,7 +29,7 @@ export function UserNav() {
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
             <AvatarImage
-              src={!picture.status ? not_picture_url : picture.url}
+              src={!picture.url ? not_picture_url : picture.url}
               alt="@martpos"
             />
             <AvatarFallback></AvatarFallback>

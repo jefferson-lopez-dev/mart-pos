@@ -93,6 +93,7 @@ export const ProfileUserProvider = ({ children }: children) => {
 
   useEffect(() => {
     getProfile();
+    setOnLoadImg(true);
   }, [session]);
 
   useEffect(() => {
