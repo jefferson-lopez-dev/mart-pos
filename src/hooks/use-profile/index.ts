@@ -6,12 +6,14 @@ interface useProfileProps {
   updateProfile: (data: object) => Promise<any>;
   changePhoto: () => Promise<any>;
   deletePhoto: () => Promise<any>;
-  getProfile: (id: string | number) => Promise<any>;
+  getProfile: () => Promise<any>;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleImageClick: () => void;
   inputFileRef: RefObject<HTMLInputElement>;
   profilePhoto: any;
   data: DataCredsProfile;
+  onLoadImg: boolean;
+  handleImageLoad: () => {};
 }
 
 export const useProfile = () => {

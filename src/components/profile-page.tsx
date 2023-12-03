@@ -17,6 +17,7 @@ import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
 import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
+import { Skeleton } from "./ui/skeleton";
 
 interface PropsInputDataEdit {
   label: string;
@@ -49,10 +50,10 @@ export function InputDataEdit({
 
   return (
     <>
-      <div className="w-[300px] flex justify-between px-3 py-1 items-center  rounded-lg border border-neutral-900">
+      <div className="w-full sm:w-[500px] h-[50px] flex justify-between px-3 py-1 items-center  rounded-lg ">
         <div>
-          <p className="opacity-50 text-sm">{label}</p>
-          <p className="opacity-90 w-[250px] overflow-hidden text-ellipsis">
+          <p className="opacity-50 text-[12px]">{label}</p>
+          <p className="opacity-90 overflow-hidden text-ellipsis break-keep">
             {credsData(data)}
           </p>
         </div>
@@ -102,18 +103,25 @@ export function ProfilePage() {
     data: {
       picture: { url, status: statusImg },
       country,
-
+      createdAt,
       email,
       fullname,
     },
+    getProfile,
     updateProfile,
     inputFileRef,
     handleFileChange,
     handleImageClick,
+    handleImageLoad,
+    onLoadImg,
   } = useProfile();
   const { push } = useRouter();
   const noPictureUrl =
     "https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg";
+
+  useEffect(() => {
+    getProfile();
+  }, []);
 
   return (
     <div>
@@ -129,22 +137,30 @@ export function ProfilePage() {
         <ChevronLeftIcon onClick={() => push("/")} />
         <h1 className="text-base opacity-90 ">Profile</h1>
       </div>
-      <div className="w-full h-[280px] gap-3 flex flex-col justify-center items-center">
+      <div className="w-full h-[300px] gap-3 flex flex-col justify-center items-center">
+        {!onLoadImg && (
+          <Skeleton className="w-[180px] h-[180px] rounded-full" />
+        )}
         <img
           onClick={handleImageClick}
-          className="rounded-full"
+          className={`rounded-full w-[180px] h-[180px] cursor-pointer ${
+            onLoadImg ? "" : "hidden"
+          }`}
           width={150}
-          src={statusImg ? url : noPictureUrl}
+          src={url}
           alt="asdas"
+          onLoad={handleImageLoad}
         />
-        <p className="text-3xl  text-center capitalize">
-          {credsData(fullname)}
-        </p>
-        <Badge translate="no" variant="secondary">
-          Mart Pos
-        </Badge>
+        <Badge variant="outline">{createdAt}</Badge>
+        {!fullname ? (
+          <Skeleton className="w-[300px] h-[30px]" />
+        ) : (
+          <p className="text-3xl w-[95%] sm:w-[500px] whitespace-nowrap overflow-hidden text-ellipsis text-center capitalize">
+            {credsData(fullname)}
+          </p>
+        )}
       </div>
-      <div className="w-full h-3/4 gap-3 flex flex-col items-center">
+      <div className="w-full pt-5 h-3/4 gap-3 flex flex-col items-center">
         <InputDataEdit
           label="Full Name"
           data={fullname}

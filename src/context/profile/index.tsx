@@ -13,19 +13,20 @@ import { createContext, createRef, useEffect, useState } from "react";
 export const ProfileUserContext = createContext({});
 
 const initalData = {
-  country: "Loading",
-  createdAt: "Loading",
-  email: "Loading",
-  fullname: "Loading",
+  country: "",
+  createdAt: "",
+  email: "",
+  fullname: "",
   picture: {
-    url: "Loading",
-    status: "Loading",
+    url: "",
+    status: "",
   },
 };
 
 export const ProfileUserProvider = ({ children }: children) => {
   const { data: session }: any = useSession();
   const [profilePhoto, setProfilePhoto] = useState<any>(false);
+  const [onLoadImg, setOnLoadImg] = useState(false);
   const [data, setData] = useState<DataCredsProfile>(initalData);
   const [newPhoto, setNewPhoto] = useState<{ photo: File | null }>({
     photo: null,
@@ -57,6 +58,7 @@ export const ProfileUserProvider = ({ children }: children) => {
 
   const changePhoto = async () => {
     if (newPhoto.photo === null) return;
+    setOnLoadImg(false);
     const data = await getProfile();
     const res = await apiChangeProfilePicture(newPhoto, data.id);
     if (res.data.status === 200) {
@@ -85,6 +87,10 @@ export const ProfileUserProvider = ({ children }: children) => {
     }
   };
 
+  const handleImageLoad = () => {
+    setOnLoadImg(true);
+  };
+
   useEffect(() => {
     getProfile();
   }, [session]);
@@ -107,6 +113,8 @@ export const ProfileUserProvider = ({ children }: children) => {
         inputFileRef,
         profilePhoto,
         data,
+        onLoadImg,
+        handleImageLoad,
       }}
     >
       {children}
