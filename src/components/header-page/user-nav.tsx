@@ -17,21 +17,21 @@ import Link from "next/link";
 
 export function UserNav() {
   const {
-    data: {
-      picture: { url },
-      fullname,
-    },
+    data: { picture, fullname },
   } = useProfile();
   const { data: session }: any = useSession();
-  const noPictureUrl =
-    "https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg";
+  const not_picture_url =
+    "https://res.cloudinary.com/jeffersoncloud/image/upload/v1701628837/photos/e9fqfyuthrjjo9ojcw6p.jpg";
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage src={url} alt="@martpos" />
+            <AvatarImage
+              src={!picture.status ? not_picture_url : picture.url}
+              alt="@martpos"
+            />
             <AvatarFallback></AvatarFallback>
           </Avatar>
         </Button>
