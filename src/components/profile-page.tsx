@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useProfile } from "@/hooks/use-profile";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { ChevronLeftIcon, PencilIcon } from "lucide-react";
 import {
@@ -11,11 +11,12 @@ import {
   DialogTrigger,
   DialogClose,
   DialogHeader,
+  DialogDescription,
+  DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 import { useForm } from "react-hook-form";
-import { DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { useRouter } from "next/navigation";
 import { Skeleton } from "./ui/skeleton";
 
@@ -100,13 +101,7 @@ export function InputDataEdit({
 
 export function ProfilePage() {
   const {
-    data: {
-      picture: { url, status: statusImg },
-      country,
-      createdAt,
-      email,
-      fullname,
-    },
+    data: { picture, country, createdAt, email, fullname },
     getProfile,
     updateProfile,
     inputFileRef,
@@ -116,19 +111,19 @@ export function ProfilePage() {
     onLoadImg,
   } = useProfile();
   const { push } = useRouter();
-  const noPictureUrl =
-    "https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg";
 
   useEffect(() => {
     getProfile();
   }, []);
+
+  const not_picture_url =
+    "https://res.cloudinary.com/jeffersoncloud/image/upload/v1701628837/photos/e9fqfyuthrjjo9ojcw6p.jpg";
 
   return (
     <div>
       <input
         accept="image/*"
         type="file"
-      
         style={{ display: "none" }}
         ref={inputFileRef}
         onChange={handleFileChange}
@@ -147,11 +142,15 @@ export function ProfilePage() {
             onLoadImg ? "" : "hidden"
           }`}
           width={150}
-          src={url}
+          src={!picture.status ? not_picture_url : picture.url}
           alt="asdas"
           onLoad={handleImageLoad}
         />
-        <Badge variant="outline">{createdAt}</Badge>
+        {!createdAt ? (
+          <Skeleton className="w-[100px] h-[20px]" />
+        ) : (
+          <Badge variant="outline">{createdAt}</Badge>
+        )}
         {!fullname ? (
           <Skeleton className="w-[300px] h-[30px]" />
         ) : (
