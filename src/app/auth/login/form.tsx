@@ -30,13 +30,13 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
     if (res?.error) {
       setLoading(false);
       toast({
-        title: `🔴 ${res?.error}`,
+        title: `${res?.error}`,
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
     }
     if (res?.ok)
       toast({
-        title: "🟢 Welcome to Mart",
+        title: "Welcome to Mart",
         action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
       });
     if (res?.ok) return push("/");

@@ -25,6 +25,7 @@ export function FormRegister({ className, ...props }: UserAuthFormProps) {
   const handleSignUp = async (data: any) => {
     setLoading(true);
     const resonseSignUp = await signUpCredentials(data);
+
     if (resonseSignUp.status === 409) {
       setLoading(false);
       toast({
@@ -42,7 +43,7 @@ export function FormRegister({ className, ...props }: UserAuthFormProps) {
       });
     }
     const res = await signIn("credentials", {
-      email: resonseSignUp.email,
+      email: data.email,
       password: data.password,
       redirect: false,
     });
