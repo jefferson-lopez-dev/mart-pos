@@ -128,7 +128,7 @@ export function ProfilePage() {
       <input
         accept="image/*"
         type="file"
-        capture="environment"
+      
         style={{ display: "none" }}
         ref={inputFileRef}
         onChange={handleFileChange}
