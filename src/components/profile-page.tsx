@@ -120,7 +120,7 @@ export function ProfilePage() {
       <input
         accept="image/*"
         type="file"
-        multiple
+      
         style={{ display: "none" }}
         ref={inputFileRef}
         onChange={handleFileChange}
