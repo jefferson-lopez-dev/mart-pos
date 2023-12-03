@@ -51,7 +51,7 @@ export function MainNav({
       <Link
         href="/"
         className={`break-normal text-sm font-medium ${
-          pn !== "/profile" && "text-muted-foreground"
+          pn !== "/Settings" && "text-muted-foreground"
         } transition-colors hover:text-primary`}
       >
         Settings

@@ -1,4 +1,5 @@
 import { ProfileUserContext } from "@/context";
+import { DataCredsProfile } from "@/interface";
 import React, { RefObject, useContext } from "react";
 
 interface useProfileProps {
@@ -10,7 +11,7 @@ interface useProfileProps {
   handleImageClick: () => void;
   inputFileRef: RefObject<HTMLInputElement>;
   profilePhoto: any;
-  data: any;
+  data: DataCredsProfile;
 }
 
 export const useProfile = () => {

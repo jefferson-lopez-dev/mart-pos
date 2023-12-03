@@ -11,21 +11,27 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useProfile } from "@/hooks/use-profile";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
 export function UserNav() {
+  const {
+    data: {
+      picture: { url, status: statusImg },
+      fullname,
+    },
+  } = useProfile();
   const { data: session }: any = useSession();
+  const noPictureUrl =
+    "https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg";
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
           <Avatar className="h-8 w-8">
-            <AvatarImage
-              src="https://i.pinimg.com/564x/2a/2e/7f/2a2e7f0f60b750dfb36c15c268d0118d.jpg"
-              alt="@martpos"
-            />
+            <AvatarImage src={statusImg ? url : noPictureUrl} alt="@martpos" />
             <AvatarFallback>MP</AvatarFallback>
           </Avatar>
         </Button>
@@ -33,8 +39,8 @@ export function UserNav() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {session?.user?.fullname}
+            <p className="text-sm font-medium leading-none capitalize">
+              {fullname}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
               {session?.user?.email}

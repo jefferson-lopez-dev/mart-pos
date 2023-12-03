@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 import {
   apiChangeProfilePicture,
@@ -5,35 +6,61 @@ import {
   apiGetProfileData,
   apiUpdateProfileData,
 } from "@/endpoint";
-import { children } from "@/interface";
+import { DataCredsProfile, children } from "@/interface";
+import { useSession } from "next-auth/react";
 import { createContext, createRef, useEffect, useState } from "react";
 
 export const ProfileUserContext = createContext({});
 
+const initalData = {
+  country: "Loading",
+  createdAt: "Loading",
+  email: "Loading",
+  fullname: "Loading",
+  picture: {
+    url: "Loading",
+    status: "Loading",
+  },
+};
+
 export const ProfileUserProvider = ({ children }: children) => {
+  const { data: session }: any = useSession();
   const [profilePhoto, setProfilePhoto] = useState<any>(false);
-  const [data, setData] = useState<any>(false);
+  const [data, setData] = useState<DataCredsProfile>(initalData);
   const [newPhoto, setNewPhoto] = useState<{ photo: File | null }>({
     photo: null,
   });
 
-  const getProfile = async (id: string) => {
-    const res = await apiGetProfileData({ id });
-    if (res.data.status === 204) {
-      setData(res.data.creds_profile);
-      setProfilePhoto(res.data.creds_profile.picture.url);
+  const getProfile = async () => {
+    if (!session?.user?._id) return;
+    const { creds_profile, status, data } = await apiGetProfileData({
+      id: session?.user?._id,
+      fullname: session?.user?.fullname,
+      email: session?.user?.email,
+    });
+    const { picture } = creds_profile;
+    const { url } = picture;
+
+    if (status === 204) {
+      setData(creds_profile);
+      setProfilePhoto(url);
     }
-    return res.data;
+    return data;
   };
 
   const updateProfile = async (data: object) => {
-    await apiUpdateProfileData(data);
+    const res = await apiUpdateProfileData({ id: session?.user?._id, ...data });
+    if (res.data.status === 200) {
+      getProfile();
+    }
   };
 
   const changePhoto = async () => {
     if (newPhoto.photo === null) return;
-    const res = await apiChangeProfilePicture(newPhoto);
+    const data = await getProfile();
+    const res = await apiChangeProfilePicture(newPhoto, data.id);
     if (res.data.status === 200) {
+      getProfile();
       setNewPhoto({
         photo: null,
       });
@@ -59,10 +86,13 @@ export const ProfileUserProvider = ({ children }: children) => {
   };
 
   useEffect(() => {
+    getProfile();
+  }, [session]);
+
+  useEffect(() => {
     if (newPhoto.photo !== null) {
       changePhoto();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [newPhoto]);
 
   return (
