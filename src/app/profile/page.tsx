@@ -1,9 +1,16 @@
-import { ProfilePage } from "@/components/profile-page";
+import {
+  UserProfilePage,
+  BackHeader,
+  EditDataSection,
+  ProfilePhoto,
+} from "@/components/profile-page";
 
 export default function Profile() {
   return (
-    <div>
-      <ProfilePage />
-    </div>
+    <UserProfilePage>
+      <BackHeader />
+      <ProfilePhoto />
+      <EditDataSection />
+    </UserProfilePage>
   );
 }
