@@ -1,4 +1,4 @@
-export { EditDataSection } from "./edit-data-section";
-export { ProfilePhoto } from "./profile-photo";
-export { BackHeader } from "./back-header";
-export { UserProfilePage } from "./user-profile-page";
+export { EditDataSection } from "./sections/edit-data-section";
+export { ProfilePhoto } from "./sections/profile-photo";
+export { BackHeader } from "./sections/back-header";
+export { CoreProfile } from "./core-profile";

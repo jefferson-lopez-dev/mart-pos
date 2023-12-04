@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { DataEditCard } from "./data-edit-card";
+import { DataEditCard } from "../comps/data-edit-card";
 import { useProfile } from "@/hooks/use-profile";
 
 export function EditDataSection() {

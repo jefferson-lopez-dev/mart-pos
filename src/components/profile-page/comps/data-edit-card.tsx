@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { credsData } from "./__functions";
+import { credsData } from "../common/__functions";
 import {
   Dialog,
   DialogClose,
@@ -10,10 +10,10 @@ import {
   DialogTrigger,
 } from "@radix-ui/react-dialog";
 import { PencilIcon } from "lucide-react";
-import { DialogContent, DialogHeader } from "../ui/dialog";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { TypesInputDataEdit } from "./__types";
+import { DialogContent, DialogHeader } from "../../ui/dialog";
+import { Input } from "../../ui/input";
+import { Button } from "../../ui/button";
+import { TypesInputDataEdit } from "../common/__types";
 
 export function DataEditCard({
   label,

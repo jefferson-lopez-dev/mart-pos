@@ -1,10 +1,10 @@
 "use client";
 import Image from "next/image";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../../ui/skeleton";
 import { useProfile } from "@/hooks/use-profile";
-import { not_picture_url } from "./__constans";
-import { credsData } from "./__functions";
-import { Badge } from "../ui/badge";
+import { not_picture_url } from "../common/__constans";
+import { credsData } from "../common/__functions";
+import { Badge } from "../../ui/badge";
 
 function Picture() {
   const {

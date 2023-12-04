@@ -4,7 +4,7 @@ import { useProfile } from "@/hooks/use-profile";
 import React, { useEffect } from "react";
 import { children } from "@/interface";
 
-export function UserProfilePage({ children }: children) {
+export function CoreProfile({ children }: children) {
   const { getProfile } = useProfile();
 
   useEffect(() => {

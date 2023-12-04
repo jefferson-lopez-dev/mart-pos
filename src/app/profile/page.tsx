@@ -1,5 +1,5 @@
 import {
-  UserProfilePage,
+  CoreProfile,
   BackHeader,
   EditDataSection,
   ProfilePhoto,
@@ -7,10 +7,10 @@ import {
 
 export default function Profile() {
   return (
-    <UserProfilePage>
+    <CoreProfile>
       <BackHeader />
       <ProfilePhoto />
       <EditDataSection />
-    </UserProfilePage>
+    </CoreProfile>
   );
 }
