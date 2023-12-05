@@ -39,10 +39,10 @@ function Picture() {
             onClick={() => {
               deletePhoto();
             }}
-            className="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-neutral-800 border border-neutral-500 relative top-12 hover:bg-red-900  hover:border-red-500"
+            className="w-[34px] h-[34px] flex items-center justify-center rounded-full bg-neutral-800 border border-neutral-500 relative top-12 active:bg-red-900  active:border-red-500"
           >
             <TrashIcon
-              className="text-neutral-200 hover:text-red-200"
+              className="text-neutral-200 active:text-red-200"
               size={18}
             />
           </button>
