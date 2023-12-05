@@ -37,6 +37,8 @@ export const apiChangeProfilePicture = async (data: any, id: string) => {
   return await profile.put(`/picture/${id}`, form, header);
 };
 
-export const apiDeleteProfilePicture = async () => {
-  return await profile.delete("/picture");
+export const apiDeleteProfilePicture = async (id: string) => {
+  const data = await profile.delete(`/picture/${id}`);
+  console.log(data);
+  return data;
 };

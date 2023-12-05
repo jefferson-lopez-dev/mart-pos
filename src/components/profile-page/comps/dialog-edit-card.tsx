@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { PencilIcon } from "lucide-react";
+import { Settings2Icon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { DialogEditCardProps } from "../common";
@@ -33,7 +33,7 @@ export function DialogEditCard({
     <Dialog>
       <DialogTrigger>
         <div className="w-[30px] h-[30px]  rounded-full bg-neutral-900 flex items-center justify-center">
-          <PencilIcon className="opacity-50 cursor-pointer" size={18} />
+          <Settings2Icon className="opacity-50 cursor-pointer" size={18} />
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">

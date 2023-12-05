@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
+import { toast } from "@/components/ui/use-toast";
 import {
   apiChangeProfilePicture,
   apiDeleteProfilePicture,
@@ -7,6 +8,7 @@ import {
   apiUpdateProfileData,
 } from "@/endpoint";
 import { DataCredsProfile, children } from "@/interface";
+import { ToastAction } from "@radix-ui/react-toast";
 import { useSession } from "next-auth/react";
 import { createContext, createRef, useEffect, useState } from "react";
 
@@ -58,19 +60,38 @@ export const ProfileUserProvider = ({ children }: children) => {
 
   const changePhoto = async () => {
     if (newPhoto.photo === null) return;
-    setOnLoadImg(false);
+    toast({
+      title: "Uploading new profile photo. Please wait.",
+      description: "This process may take a moment.",
+    });
     const data = await getProfile();
     const res = await apiChangeProfilePicture(newPhoto, data.id);
     if (res.data.status === 200) {
-      getProfile();
+      await getProfile();
       setNewPhoto({
         photo: null,
+      });
+      toast({
+        title: "Profile photo changed successfully!",
+        description: "The new photo is now uploaded.",
       });
     }
   };
 
   const deletePhoto = async () => {
-    await apiDeleteProfilePicture();
+    const data = await getProfile();
+    toast({
+      title: "Deleting profile photo. Please wait.",
+      description: "This process may take a moment.",
+    });
+    const res = await apiDeleteProfilePicture(data.id);
+    if (res.data.status === 200) {
+      await getProfile();
+      toast({
+        title: "Profile photo deleted successfully!",
+        description: "You no longer have a profile photo.",
+      });
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -88,12 +109,13 @@ export const ProfileUserProvider = ({ children }: children) => {
   };
 
   const handleImageLoad = () => {
-    setOnLoadImg(true);
+    setTimeout(() => {
+      setOnLoadImg(true);
+    }, 1000);
   };
 
   useEffect(() => {
     getProfile();
-    setOnLoadImg(true);
   }, [session]);
 
   useEffect(() => {

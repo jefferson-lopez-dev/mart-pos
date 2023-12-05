@@ -5,6 +5,6 @@ const API_PRODUCTION_URL = `https://api-mart-profile.onrender.com/${endPoint}`;
 const API_LOCAL_URL = ` http://localhost:3014/${endPoint}`;
 
 export const profile = axios.create({
-  baseURL: API_PRODUCTION_URL,
+  baseURL: API_LOCAL_URL,
   withCredentials: true,
 });
