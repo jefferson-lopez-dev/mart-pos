@@ -49,7 +49,7 @@ export function MainNav({
         Inventory
       </Link>
       <Link
-        href="/"
+        href="/settings"
         className={`break-normal text-sm font-medium ${
           pn !== "/Settings" && "text-muted-foreground"
         } transition-colors hover:text-primary`}
