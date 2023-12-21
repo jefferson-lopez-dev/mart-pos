@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 
 function Picture() {
   const {
@@ -52,6 +53,7 @@ function Picture() {
 export default function Settings() {
   const [updateFullName, setUpdateFullName] = useState(false);
   const { handleSubmit, register, setValue } = useForm();
+  const { toast } = useToast();
   const {
     data: { country, email, fullname },
     updateProfile,
@@ -93,6 +95,7 @@ export default function Settings() {
             const res = await updateProfile(data);
             if (res.status === 200) {
               setUpdateFullName(false);
+              toast({ title: "Full Name updated" });
             }
           })}
           className="border w-full max-w-[700px] rounded-lg my-10"
