@@ -55,6 +55,10 @@ export const ProfileUserProvider = ({ children }: children) => {
     const res = await apiUpdateProfileData({ id: session?.user?._id, ...data });
     if (res.data.status === 200) {
       getProfile();
+      return {
+        status: 200,
+        message: res.data.message,
+      };
     }
   };
 
