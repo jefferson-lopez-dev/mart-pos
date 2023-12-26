@@ -115,7 +115,12 @@ export default function Settings() {
               </p>
               <br />
               <div className="flex gap-9">
-                <Input type="text" {...register("fullname")} />
+                <Input
+                  type="text"
+                  {...register("fullname", {
+                    maxLength: 32,
+                  })}
+                />
                 <Button
                   className="w-[100px]"
                   disabled={updateFullName}
