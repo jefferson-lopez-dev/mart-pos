@@ -71,12 +71,12 @@ export default function Settings() {
     <div className="flex flex-col items-center">
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[730px] px-3 h-[80px] flex items-center ">
-          <h1 className="text-3xl font-semibold">Settings</h1>
+          <h1 className="text-3xl font-semibold">Account Settings</h1>
         </div>
       </div>
       {/* <div className="w-full border-b" /> */}
       <div className="w-full flex flex-col items-center p-3 gap-8">
-        <div className="border w-full max-w-[700px] rounded-lg bg-black">
+        <div className="border w-full max-w-[700px] rounded-lg ">
           <div className="h-[120px] flex justify-between items-center">
             <div className="px-5">
               <h2 className="text-xl h-[40px] font-semibold">Picture</h2>
@@ -96,7 +96,7 @@ export default function Settings() {
           </div>
         </div>
         <form
-          className="border w-full max-w-[700px] rounded-lg bg-black"
+          className="border w-full max-w-[700px] rounded-lg "
           onSubmit={handleSubmit(async (data) => {
             setUpdateFullName(true);
             const res = await updateProfile(data);
@@ -138,7 +138,7 @@ export default function Settings() {
           </div>
         </form>
         <form
-          className="border w-full max-w-[700px] rounded-lg bg-black"
+          className="border w-full max-w-[700px] rounded-lg "
           onSubmit={handleSubmit(async (data) => {
             setUpdateGmail(true);
             const res = await updateProfile(data);
@@ -178,7 +178,7 @@ export default function Settings() {
           </div>
         </form>
         <form
-          className="border w-full max-w-[700px] rounded-lg bg-black"
+          className="border w-full max-w-[700px] rounded-lg "
           onSubmit={handleSubmit(async (data) => {
             setUpdateCountry(true);
             const res = await updateProfile(data);
