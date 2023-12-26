@@ -11,14 +11,7 @@ export const metadata: Metadata = {
     {
       rel: "icon",
       type: "image/x-icon",
-      url: "/mart-dark.png",
-      media: "(prefers-color-scheme: light)",
-    },
-    {
-      rel: "icon",
-      type: "image/png",
-      url: "/mart-light.png",
-      media: "(prefers-color-scheme: dark)",
+      url: "/favicon-mart.png",
     },
   ],
 };
