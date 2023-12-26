@@ -25,25 +25,26 @@ export function HeaderPage() {
   }, [theme, systemTheme]);
 
   return (
-    <div className="border-b sticky top-0 h-[100px] bg-black flex items-center w-full z-10">
-      <div className="flex h-[80px] w-full m-3 flex-col justify-around">
-        <div className="flex">
-          <Image
-            className="h-[30px] w-[30px] cursor-pointer"
-            onClick={() => push("/")}
-            src={logo}
-            alt="photo"
-            width={35}
-            height={35}
-          />
-          <div className="ml-auto flex items-center space-x-4">
-            <Search />
-            <UserNav />
+    <div className="border-b pb-1 sticky top-0  bg-inherit z-10">
+      <div className="h-[50px] bg-inherit flex items-center w-full overflow-hidden">
+        <div className="flex h-[80px] w-full flex-col justify-around">
+          <div className="flex w-full px-2">
+            <Image
+              className="h-[30px] w-[30px] cursor-pointer"
+              onClick={() => push("/")}
+              src={logo}
+              alt="photo"
+              width={35}
+              height={35}
+            />
+            <div className="ml-auto flex items-center space-x-4">
+              <UserNav />
+            </div>
           </div>
         </div>
-        <div className="flex">
-          <MainNav className="" />
-        </div>
+      </div>
+      <div className="flex w-full px-2 h-[30px]  bg-inherit">
+        <MainNav className="" />
       </div>
     </div>
   );
