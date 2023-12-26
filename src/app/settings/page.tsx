@@ -195,7 +195,7 @@ export default function Settings() {
                 Please select your country from the options below.
               </p>
               <br />
-              <div className="flex gap-9">
+              <div className="flex gap-9 ">
                 <Input type="text" {...register("country")} />
                 <Button
                   className="w-[100px]"
