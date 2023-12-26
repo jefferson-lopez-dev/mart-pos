@@ -102,7 +102,7 @@ export default function Settings() {
             const res = await updateProfile(data);
             if (res.status === 200) {
               setUpdateFullName(false);
-              toast({ title: "Gmail updated" });
+              toast({ title: "Full Name updated" });
             }
           })}
         >
