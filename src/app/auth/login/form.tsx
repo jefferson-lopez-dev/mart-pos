@@ -89,13 +89,11 @@ export function FormLogin({ className, ...props }: UserAuthFormProps) {
       </div>
       <Button
         size="lg"
-        onClick={() => {
-          toast({
-            title: "Ups! Comming Soon",
-            action: (
-              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-            ),
+        onClick={async () => {
+          await signIn("google", {
+            redirect: false,
           });
+          push("/");
         }}
         className="gap-2"
         variant="outline"
