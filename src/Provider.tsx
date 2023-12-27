@@ -19,9 +19,7 @@ export function MartProvider({ children }: children) {
       >
         <AuthProvider>
           <ProfileUserProvider>
-            {path === "/" && <HeaderPage />}
-            {path === "/profile" && <HeaderPage />}
-            {path === "/settings" && <HeaderPage />}
+            {path !== "/auth/login" && "/auth/register" && <HeaderPage />}
             {children}
             <Toaster />
           </ProfileUserProvider>
