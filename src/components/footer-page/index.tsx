@@ -6,7 +6,7 @@ import { Laptop2, Moon, Sun } from "lucide-react";
 import { Button } from "../ui/button";
 
 export function FooterPage() {
-  const { theme, systemTheme, setTheme } = useTheme();
+  const { theme, systemTheme, setTheme, themes } = useTheme();
   const { push } = useRouter();
   const [logo, setLogo] = useState("/mart-light.png");
 
@@ -21,7 +21,7 @@ export function FooterPage() {
     logoMart();
   }, [theme, systemTheme]);
   return (
-    <footer className="flex w-full justify-center h-[100px] items-center border-t">
+    <div className="flex w-full justify-center h-[100px] items-center border-t">
       <div className="flex w-full max-w-[730px] justify-between">
         <div className="flex items-center pl-3">
           <Image
@@ -34,30 +34,30 @@ export function FooterPage() {
           />
           <p className="text-mart text-[30px]">MART</p>
         </div>
-        <div className="flex items-center pr-3">
+        <div className="flex gap-1 items-center pr-3">
           <Button
             onClick={() => setTheme("light")}
-            variant={theme === "light" ? "secondary" : "ghost"}
+            variant="ghost"
             className="rounded-full p-[10px]"
           >
             <Sun className="icon2" />
           </Button>
           <Button
             onClick={() => setTheme("dark")}
-            variant={theme === "dark" ? "secondary" : "ghost"}
+            variant="ghost"
             className="rounded-full p-[10px]"
           >
             <Moon className="icon2" />
           </Button>
           <Button
             onClick={() => setTheme("system")}
-            variant={theme === "system" ? "secondary" : "ghost"}
+            variant="ghost"
             className="rounded-full p-[10px]"
           >
             <Laptop2 className="icon2" />
           </Button>
         </div>
       </div>
-    </footer>
+    </div>
   );
 }
