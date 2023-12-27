@@ -20,8 +20,10 @@ export function FooterPage() {
           setLogo("/mart-dark.png");
           break;
         case systemTheme === "light":
-        case systemTheme === "dark":
           setLogo("/mart-dark.png");
+          break;
+        case systemTheme === "dark":
+          setLogo("/mart-light.png");
           break;
         default:
           setLogo("/default-logo.png");
