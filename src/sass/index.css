@@ -6,6 +6,15 @@
   font-family: "Inter", sans-serif !important;
 }
 
-.font-lexend {
+.font-lexend, .text-mart {
   font-family: "Lexend", sans-serif !important;
+}
+
+.text-mart {
+  font-weight: 900;
+}
+
+.icon2 {
+  width: 20px;
+  height: 20px;
 }/*# sourceMappingURL=index.css.map */

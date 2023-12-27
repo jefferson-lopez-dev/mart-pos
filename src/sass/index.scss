@@ -10,3 +10,13 @@
 .font-lexend {
   font-family: "Lexend", sans-serif !important;
 }
+
+.text-mart {
+  @extend .font-lexend;
+  font-weight: 900;
+}
+
+.icon2 {
+  width: 20px;
+  height: 20px;
+}

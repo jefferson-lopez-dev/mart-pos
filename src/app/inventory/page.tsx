@@ -3,7 +3,7 @@ import { Info, Search } from "lucide-react";
 
 export default function page() {
   return (
-    <div className="flex flex-col items-center h-[85dvh]">
+    <div className="flex flex-col items-center h-[86dvh]">
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[730px] px-3 h-[120px] flex items-center ">
           <h1 className="text-3xl font-semibold">Inventory</h1>
