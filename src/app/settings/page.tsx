@@ -70,11 +70,11 @@ export default function Settings() {
   return (
     <div className="flex flex-col items-center">
       <div className="w-full flex justify-center">
-        <div className="w-full max-w-[730px] px-3 h-[80px] flex items-center ">
+        <div className="w-full max-w-[730px] px-3 h-[120px] flex items-center ">
           <h1 className="text-3xl font-semibold">Account Settings</h1>
         </div>
       </div>
-      {/* <div className="w-full border-b" /> */}
+      <div className="w-full border-b" />
       <div className="w-full flex flex-col items-center p-3 gap-8">
         <div className="border w-full max-w-[700px] rounded-lg ">
           <div className="h-[120px] flex justify-between items-center">
