@@ -25,10 +25,10 @@ export function HeaderPage() {
   }, [theme, systemTheme]);
 
   return (
-    <div className="border-b sticky top-0 bg-inherit z-10">
+    <header className="border-b sticky top-0 bg-inherit z-10">
       <div className="h-[9dvh] bg-inherit flex items-start w-full overflow-hidden">
         <div className="flex h-full w-full flex-col justify-around">
-          <div className="flex w-full px-2">
+          <div className="flex w-full items-center px-2">
             <Image
               className="h-[30px] w-[30px] cursor-pointer"
               onClick={() => push("/")}
@@ -46,6 +46,6 @@ export function HeaderPage() {
       <div className="flex w-full px-2 h-[40px]  bg-inherit">
         <MainNav className="" />
       </div>
-    </div>
+    </header>
   );
 }
