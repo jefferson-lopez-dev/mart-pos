@@ -25,8 +25,8 @@ export function HeaderPage() {
   }, [theme, systemTheme]);
 
   return (
-    <div className="border-b pb-1 sticky top-0  bg-inherit z-10">
-      <div className="h-[10dvh] bg-inherit flex  items-start w-full overflow-hidden">
+    <div className="border-b sticky top-0 bg-inherit z-10">
+      <div className="h-[9dvh] bg-inherit flex items-start w-full overflow-hidden">
         <div className="flex h-full w-full flex-col justify-around">
           <div className="flex w-full px-2">
             <Image
@@ -43,7 +43,7 @@ export function HeaderPage() {
           </div>
         </div>
       </div>
-      <div className="flex w-full px-2 h-[30px]  bg-inherit">
+      <div className="flex w-full px-2 h-[40px]  bg-inherit">
         <MainNav className="" />
       </div>
     </div>
