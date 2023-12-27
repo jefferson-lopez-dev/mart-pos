@@ -38,12 +38,12 @@ export function MainNav({
           Sales
         </Link>
         <Link
-          href="/"
+          href="/inventory"
           className={`break-normal text-sm font-medium ${
             pn !== "/inventory" && "text-muted-foreground"
           } transition-colors hover:text-primary`}
         >
-          Inventories
+          Inventory
         </Link>
         <Link
           href="/"
