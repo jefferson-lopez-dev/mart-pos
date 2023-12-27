@@ -6,6 +6,7 @@ import { HeaderPage } from "./components/header-page";
 import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
+import { FooterPage } from "./components/footer-page";
 
 export function MartProvider({ children }: children) {
   const path = usePathname();
@@ -21,6 +22,7 @@ export function MartProvider({ children }: children) {
           <ProfileUserProvider>
             {path !== "/auth/login" && "/auth/register" && <HeaderPage />}
             {children}
+            {path !== "/auth/login" && "/auth/register" && <FooterPage />}
             <Toaster />
           </ProfileUserProvider>
         </AuthProvider>
