@@ -11,15 +11,27 @@ export function FooterPage() {
   const [logo, setLogo] = useState("/mart-light.png");
 
   useEffect(() => {
-    function logoMart() {
-      if (theme === "dark" || systemTheme === "dark")
-        setLogo("/mart-light.png");
-
-      if (theme === "light" || systemTheme === "light")
-        setLogo("/mart-dark.png");
+    function setLogoBasedOnTheme() {
+      switch (true) {
+        case theme === "dark":
+          setLogo("/mart-light.png");
+          break;
+        case theme === "light":
+          setLogo("/mart-dark.png");
+          break;
+        case systemTheme === "light":
+        case systemTheme === "dark":
+          setLogo("/mart-dark.png");
+          break;
+        default:
+          setLogo("/default-logo.png");
+          break;
+      }
     }
-    logoMart();
+
+    setLogoBasedOnTheme();
   }, [theme, systemTheme]);
+
   return (
     <div className="flex w-full justify-center h-[100px] items-center border-t">
       <div className="flex w-full max-w-[730px] justify-between">
