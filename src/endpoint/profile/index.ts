@@ -13,6 +13,7 @@ interface PropsGetProfile {
   fullname?: string;
   country?: string;
   email?: string;
+  url_picture?: string;
 }
 
 export const apiGetProfileData = async (data: PropsGetProfile) => {

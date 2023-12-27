@@ -106,15 +106,13 @@ export function FormRegister({ className, ...props }: UserAuthFormProps) {
         </div>
       </div>
       <Button
-        onClick={() => {
-          toast({
-            title: "Ups! Comming Soon",
-            action: (
-              <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-            ),
-          });
-        }}
         size="lg"
+        onClick={async () => {
+          await signIn("google", {
+            redirect: false,
+          });
+          push("/");
+        }}
         className="gap-2"
         variant="outline"
         type="button"

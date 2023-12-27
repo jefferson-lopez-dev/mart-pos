@@ -35,18 +35,18 @@ export const ProfileUserProvider = ({ children }: children) => {
   });
 
   const getProfile = async () => {
-    if (!session?.user?._id) return;
     const { creds_profile, status, data } = await apiGetProfileData({
-      id: session?.user?._id,
-      fullname: session?.user?.fullname,
+      id: session?.user?._id ? session?.user?._id : session?.user?.id,
+      fullname: session?.user?.fullname
+        ? session?.user?.fullname
+        : session?.user?.name,
       email: session?.user?.email,
+      url_picture: session?.user?.image ? session?.user?.image : undefined,
     });
-    const { picture } = creds_profile;
-    const { url } = picture;
 
     if (status === 204) {
       setData(creds_profile);
-      setProfilePhoto(url);
+      setProfilePhoto(creds_profile.picture.url);
     }
     return data;
   };
