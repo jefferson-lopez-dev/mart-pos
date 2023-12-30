@@ -1,7 +1,10 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Info, Search } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function page() {
+export default function Page() {
   return (
     <div className="flex flex-col items-center h-[86dvh]">
       <div className="w-full flex justify-center">
@@ -21,11 +24,13 @@ export default function page() {
             className="placeholder:text-neutral-500 bg-transparent w-full h-full focus:outline-none text-[14px]"
           />
         </div>
-        <Button>New Inventory</Button>
+        <Link href={"/inventory/new"}>
+          <Button>New Inventory</Button>
+        </Link>
       </div>
       <div className="w-full h-full max-w-[730px] px-3 pb-3">
         <div className=" text-neutral-500 flex flex-col items-center justify-center gap-2 w-full h-full rounded-md">
-          <p className="text-center">
+          <p className="text-center text-sm">
             You do not have inventories created. Create your first inventory!
           </p>
         </div>
