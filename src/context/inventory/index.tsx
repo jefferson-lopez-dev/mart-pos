@@ -23,12 +23,10 @@ const InventoryProvider = ({ children }: children) => {
   const { toast } = useToast();
 
   const findAll = async () => {
-    setLoadingInventory(true);
     const res = await findAllInventories({
       create_by: session?.user?._id ? session?.user?._id : session?.user?.id,
     });
     setInventories(res.data.docs);
-    setLoadingInventory(false);
   };
 
   const newInventory = async (data: Inventory) => {

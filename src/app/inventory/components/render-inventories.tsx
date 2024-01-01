@@ -121,5 +121,5 @@ export function RenderInventories() {
     </div>
   );
 
-  return loadingInventory ? loadingInventories : viewInventories;
+  return viewInventories;
 }
