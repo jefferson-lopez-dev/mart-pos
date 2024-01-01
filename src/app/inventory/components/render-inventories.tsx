@@ -50,16 +50,9 @@ export function RenderInventories() {
               }}
             >
               <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <span className="w-[40px] h-[40px] flex items-center justify-center text-neutral-500 hover:dark:text-neutral-100 hover:text-neutral-800 cursor-pointer">
-                      <Pencil size={20} />
-                    </span>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Edit</p>
-                  </TooltipContent>
-                </Tooltip>
+                <span className="w-[40px] h-[40px] flex items-center justify-center text-neutral-500 hover:dark:text-neutral-100 hover:text-neutral-800 cursor-pointer">
+                  <Pencil size={20} />
+                </span>
               </TooltipProvider>
             </SheetTrigger>
             <SheetContent>
