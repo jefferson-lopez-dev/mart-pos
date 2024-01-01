@@ -5,7 +5,7 @@ const API_PRODUCTION_PROFILE_URL = `https://api-mart-profile.onrender.com/${ENDP
 const API_LOCAL_PROFILE_URL = ` http://localhost:3014/${ENDPOINT_PROFILE}`;
 
 const ENDPOINT_POS = "api/pos";
-const API_PRODUCTION_POS_URL = `http://localhost:1204/${ENDPOINT_POS}`;
+const API_PRODUCTION_POS_URL = `https://api-mart-pos.onrender.com/${ENDPOINT_POS}`;
 const API_LOCAL_POS_URL = `http://localhost:1204/${ENDPOINT_POS}`;
 
 export const profile = axios.create({
@@ -14,5 +14,5 @@ export const profile = axios.create({
 });
 
 export const pos = axios.create({
-  baseURL: API_LOCAL_POS_URL,
+  baseURL: API_PRODUCTION_POS_URL,
 });
