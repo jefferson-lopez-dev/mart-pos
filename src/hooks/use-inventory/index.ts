@@ -1,11 +1,14 @@
 import { useContext } from "react";
 import { InventoryContext } from "@/context/inventory";
 import { Inventory } from "@/interface";
+import { UpdateInventory } from "@/endpoint";
 
 interface ValuesInventory {
   findAll: () => Promise<any>;
   newInventory: (data: Inventory) => Promise<any>;
+  updateDataInventory: (data: UpdateInventory) => Promise<any>;
   inventories: [];
+  loadingInventory: boolean;
 }
 
 export const useInventory = () => {
