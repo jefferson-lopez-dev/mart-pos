@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { findAllInventories } from "@/endpoint/pos/inventory";
-import { Info, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { RenderInventories } from "./components/render-inventories";
 
 export default function Page() {

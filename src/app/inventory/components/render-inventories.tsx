@@ -14,6 +14,12 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Tooltip,
+  TooltipProvider,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -30,9 +36,12 @@ export function RenderInventories() {
         className="w-full border rounded-md h-[100px] cursor-pointer hover:border-neutral-500"
       >
         <div className="w-full flex justify-between">
-          <h1 className="text-2xl pl-3 pt-3 first-letter:uppercase">
-            <span className="text-neutral-500">{i + 1}.</span> {inventory.name}
-          </h1>
+          <div className="flex items-center pl-3 pt-3 gap-1">
+            <span className="text-neutral-500">{i + 1} </span>
+            <h1 className="text-2xl w-[200px] overflow-hidden text-ellipsis first-letter:uppercase">
+              {inventory.name}
+            </h1>
+          </div>
           <Sheet>
             <SheetTrigger
               onClick={() => {
@@ -40,9 +49,18 @@ export function RenderInventories() {
                 setValue("description", inventory.description);
               }}
             >
-              <span className="w-[40px] h-[40px] flex items-center justify-center text-neutral-500 hover:dark:text-neutral-100 hover:text-neutral-800 cursor-pointer">
-                <Pencil size={20} />
-              </span>
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <span className="w-[40px] h-[40px] flex items-center justify-center text-neutral-500 hover:dark:text-neutral-100 hover:text-neutral-800 cursor-pointer">
+                      <Pencil size={20} />
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Edit</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
             </SheetTrigger>
             <SheetContent>
               <SheetHeader>
@@ -61,7 +79,7 @@ export function RenderInventories() {
                   });
                 })}
               >
-                <div className="grid grid-cols-4 items-center gap-4">
+                <div className="">
                   <Label htmlFor="name" className="text-right">
                     Name
                   </Label>
@@ -70,18 +88,27 @@ export function RenderInventories() {
                     className="col-span-3"
                     {...register("name", {
                       required: true,
+                      maxLength: 32,
                     })}
                   />
+                  <span className="text-sm text-neutral-500">
+                    The maximum number of characters is 32
+                  </span>
                 </div>
-                <div className="grid grid-cols-4 items-center gap-4">
+                <div className="">
                   <Label htmlFor="username" className="text-right">
                     Description
                   </Label>
                   <Input
                     id="username"
                     className="col-span-3"
-                    {...register("description")}
+                    {...register("description", {
+                      maxLength: 104,
+                    })}
                   />
+                  <span className="text-sm text-neutral-500">
+                    The maximum number of characters is 104
+                  </span>
                 </div>
                 <SheetFooter>
                   <SheetClose asChild>
@@ -92,7 +119,7 @@ export function RenderInventories() {
             </SheetContent>
           </Sheet>
         </div>
-        <p className="text-sm pl-3 text-neutral-500">
+        <p className="text-sm px-3 text-neutral-500 w-full overflow-hidden text-ellipsis">
           {!inventory.description ? "No description." : inventory.description}
         </p>
       </div>
