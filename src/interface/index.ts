@@ -19,3 +19,8 @@ export interface DataCredsProfile {
     status: string;
   };
 }
+
+export interface Inventory {
+  name: string;
+  description?: string;
+}
