@@ -1,12 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { findAllInventories } from "@/endpoint/pos/inventory";
 import { Info, Search } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { RenderInventories } from "./components/render-inventories";
 
 export default function Page() {
   return (
-    <div className="flex flex-col items-center h-[86dvh]">
+    <div className="flex flex-col items-center">
       <div className="w-full flex justify-center">
         <div className="w-full max-w-[730px] px-3 h-[120px] flex items-center ">
           <h1 className="text-3xl font-semibold">Inventory</h1>
@@ -28,13 +30,7 @@ export default function Page() {
           <Button>New Inventory</Button>
         </Link>
       </div>
-      <div className="w-full h-full max-w-[730px] px-3 pb-3">
-        <div className=" text-neutral-500 flex flex-col items-center justify-center gap-2 w-full h-full rounded-md">
-          <p className="text-center text-sm">
-            You do not have inventories created. Create your first inventory!
-          </p>
-        </div>
-      </div>
+      <RenderInventories />
     </div>
   );
 }
