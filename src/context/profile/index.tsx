@@ -34,6 +34,7 @@ export const ProfileUserProvider = ({ children }: children) => {
     photo: null,
   });
 
+
   const getProfile = async () => {
     const { creds_profile, status, data } = await apiGetProfileData({
       id: session?.user?._id ? session?.user?._id : session?.user?.id,
