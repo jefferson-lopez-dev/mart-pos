@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { SessionProvider } from "next-auth/react";
 import { Toaster } from "@/components/ui/toaster";
 import { FooterPage } from "./components/footer-page";
+import { InventoryProvider } from "./context/inventory";
 
 export function MartProvider({ children }: children) {
   const path = usePathname();
@@ -20,13 +21,15 @@ export function MartProvider({ children }: children) {
       >
         <AuthProvider>
           <ProfileUserProvider>
-            {path !== "/auth/login" && path !== "/auth/register" && (
-              <HeaderPage />
-            )}
-            {children}
-            {path !== "/auth/login" && path !== "/auth/register" && (
-              <FooterPage />
-            )}
+            <InventoryProvider>
+              {path !== "/auth/login" && path !== "/auth/register" && (
+                <HeaderPage />
+              )}
+              {children}
+              {path !== "/auth/login" && path !== "/auth/register" && (
+                <FooterPage />
+              )}
+            </InventoryProvider>
             <Toaster />
           </ProfileUserProvider>
         </AuthProvider>
