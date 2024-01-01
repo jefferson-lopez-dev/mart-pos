@@ -15,5 +15,4 @@ export const profile = axios.create({
 
 export const pos = axios.create({
   baseURL: API_LOCAL_POS_URL,
-  withCredentials: true,
 });
