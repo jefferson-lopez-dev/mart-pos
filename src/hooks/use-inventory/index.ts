@@ -7,6 +7,7 @@ interface ValuesInventory {
   findAll: () => Promise<any>;
   newInventory: (data: Inventory) => Promise<any>;
   updateDataInventory: (data: UpdateInventory) => Promise<any>;
+  findByUuid: (uuid: string, create_by: string) => Promise<any>;
   inventories: [];
   loadingInventory: boolean;
 }

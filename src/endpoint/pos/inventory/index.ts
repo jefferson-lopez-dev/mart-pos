@@ -17,6 +17,10 @@ export const findAllInventories = async (data: IDS) => {
   return await pos.post("/inventory/alls", data);
 };
 
+export const findIdInventory = async (uuid: string, create_by: string) => {
+  return await pos.get(`/inventory/${uuid}/${create_by}`);
+};
+
 export const createInventory = async (data: NewInventory) => {
   return await pos.post("/inventory", data);
 };
