@@ -8,6 +8,7 @@ import {
   createInventory,
   updateInventory,
   UpdateInventory,
+  findIdInventory,
 } from "@/endpoint/pos/inventory";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -27,6 +28,11 @@ const InventoryProvider = ({ children }: children) => {
       create_by: session?.user?._id ? session?.user?._id : session?.user?.id,
     });
     setInventories(res.data.docs);
+  };
+
+  const findByUuid = async (uuid: string, create_by: string) => {
+    const res = await findIdInventory(uuid, create_by);
+    return res.data;
   };
 
   const newInventory = async (data: Inventory) => {
@@ -61,6 +67,7 @@ const InventoryProvider = ({ children }: children) => {
         inventories,
         loadingInventory,
         updateDataInventory,
+        findByUuid,
       }}
     >
       {children}
