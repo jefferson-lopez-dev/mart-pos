@@ -1,6 +1,6 @@
 import { connect } from "mongoose";
 
-const { URL_MONGO_DB_ATLAS } = process.env;
+const { URL_MONGO_DB_ATLAS, URL_MONGO_DB_LOCAL } = process.env;
 if (!URL_MONGO_DB_ATLAS) throw new Error("DB is not available");
 
 export const connectDB = async () => {
