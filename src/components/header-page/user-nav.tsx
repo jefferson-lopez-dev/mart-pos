@@ -12,6 +12,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
 import {
   Box,
@@ -47,19 +48,24 @@ export function UserNav() {
           <SheetHeader>
             <SheetTitle>
               <div className="w-full flex items-center gap-3">
-                <Avatar className="h-8 w-8">
+                <Avatar className="h-12 w-12">
                   <AvatarImage
                     src={!picture.url ? not_picture_url : picture.url}
                     alt="@martpos"
                   />
                   <AvatarFallback></AvatarFallback>
                 </Avatar>
-                {fullname}
+                <div className="w-full flex flex-col items-start">
+                  <span className="w-[250px] text-start text-ellipsis whitespace-nowrap overflow-hidden text-2xl">
+                    {fullname}
+                  </span>
+                  <div className="w-[250px] text-ellipsis whitespace-nowrap overflow-hidden text-start text-sm text-neutral-500 font-medium">
+                    {session?.user?.email}
+                  </div>
+                </div>
               </div>
             </SheetTitle>
-            <SheetDescription>
-              <div className="w-full text-start">{session?.user?.email}</div>
-            </SheetDescription>
+            <SheetDescription></SheetDescription>
           </SheetHeader>
           <br />
           <Separator />
