@@ -11,9 +11,26 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+} from "@/components/ui/sheet";
 import { useProfile } from "@/hooks/use-profile";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { Separator } from "../ui/separator";
+import {
+  BadgeDollarSign,
+  Box,
+  LayoutDashboard,
+  LogOut,
+  Settings,
+} from "lucide-react";
 
 export function UserNav() {
   const {
@@ -24,48 +41,89 @@ export function UserNav() {
     "https://res.cloudinary.com/jeffersoncloud/image/upload/v1701628837/photos/e9fqfyuthrjjo9ojcw6p.jpg";
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage
-              src={!picture.url ? not_picture_url : picture.url}
-              alt="@martpos"
-            />
-            <AvatarFallback></AvatarFallback>
-          </Avatar>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56" align="end" forceMount>
-        <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none whitespace-nowrap overflow-hidden text-ellipsis capitalize">
-              {fullname}
-            </p>
-            <p className="text-xs leading-none text-muted-foreground whitespace-nowrap overflow-hidden text-ellipsis">
-              {session?.user?.email}
-            </p>
+    <>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button variant="ghost" className="relative h-8 w-8 rounded-full">
+            <Avatar className="h-8 w-8">
+              <AvatarImage
+                src={!picture.url ? not_picture_url : picture.url}
+                alt="@martpos"
+              />
+              <AvatarFallback></AvatarFallback>
+            </Avatar>
+          </Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>
+              <div className="w-full flex items-center gap-3">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage
+                    src={!picture.url ? not_picture_url : picture.url}
+                    alt="@martpos"
+                  />
+                  <AvatarFallback></AvatarFallback>
+                </Avatar>
+                {fullname}
+              </div>
+            </SheetTitle>
+            <SheetDescription>
+              <div className="w-full text-start">{session?.user?.email}</div>
+            </SheetDescription>
+          </SheetHeader>
+          <br />
+          <Separator />
+          <br />
+          <div className="w-full flex flex-col">
+            <Link href="/inventory">
+              <Button
+                variant="ghost"
+                className="w-full justify-start flex gap-2"
+              >
+                <Box className="text-neutral-500" size={20} />
+                <span>Inventory</span>
+              </Button>
+            </Link>
+            <Link href="/">
+              <Button
+                variant="ghost"
+                className="w-full justify-start flex gap-2"
+              >
+                <LayoutDashboard className="text-neutral-500" size={20} />
+                <span>Dashboard</span>
+              </Button>
+            </Link>
+            <Link href="/">
+              <Button
+                variant="ghost"
+                className="w-full justify-start flex gap-2"
+              >
+                <BadgeDollarSign className="text-neutral-500" size={20} />
+                <span>Sales</span>
+              </Button>
+            </Link>
+            <Link href="/settings">
+              <Button
+                variant="ghost"
+                className="w-full justify-start flex gap-2"
+              >
+                <Settings className="text-neutral-500" size={20} />
+                <span>Settings</span>
+              </Button>
+            </Link>
           </div>
-        </DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuGroup>
-          <DropdownMenuItem asChild>
-            <Link href="dashboard">Dashboard</Link>
-          </DropdownMenuItem>
-          <DropdownMenuItem asChild>
-            <Link href="settings">Settings</Link>
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem
-          onClick={() => {
-            signOut();
-          }}
-        >
-          Log out
-          <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <br />
+          <Separator />
+          <br />
+          <div className="w-full flex flex-col">
+            <Button variant="ghost" className="w-full justify-start flex gap-2">
+              <LogOut className="text-neutral-500" size={20} />
+              <span>Log out</span>
+            </Button>
+          </div>
+        </SheetContent>
+      </Sheet>
+    </>
   );
 }
