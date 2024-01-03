@@ -27,7 +27,7 @@ const InventoryProvider = ({ children }: children) => {
     const res = await findAllInventories({
       create_by: session?.user?._id ? session?.user?._id : session?.user?.id,
     });
-    setInventories(res.data.docs);
+    setInventories(res.data.Inventory.docs);
   };
 
   const findByUuid = async (uuid: string, create_by: string) => {
