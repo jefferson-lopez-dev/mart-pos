@@ -1,16 +1,10 @@
 "use client";
+import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import { useProfile } from "@/hooks/use-profile";
+import { useSession, signOut } from "next-auth/react";
+import { Separator } from "../ui/separator";
 import {
   Sheet,
   SheetContent,
@@ -18,18 +12,13 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  SheetFooter,
 } from "@/components/ui/sheet";
-import { useProfile } from "@/hooks/use-profile";
-import { useSession, signOut } from "next-auth/react";
-import Link from "next/link";
-import { Separator } from "../ui/separator";
 import {
-  BadgeDollarSign,
   Box,
-  LayoutDashboard,
   LogOut,
   Settings,
+  LayoutDashboard,
+  BadgeDollarSign,
 } from "lucide-react";
 
 export function UserNav() {
@@ -117,7 +106,13 @@ export function UserNav() {
           <Separator />
           <br />
           <div className="w-full flex flex-col">
-            <Button variant="ghost" className="w-full justify-start flex gap-2">
+            <Button
+              onClick={() => {
+                signOut();
+              }}
+              variant="ghost"
+              className="w-full justify-start flex gap-2"
+            >
               <LogOut className="text-neutral-500" size={20} />
               <span>Log out</span>
             </Button>

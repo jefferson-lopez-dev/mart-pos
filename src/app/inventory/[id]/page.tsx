@@ -6,9 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInventory } from "@/hooks";
-import { Menu, MoreVertical, Settings, Settings2 } from "lucide-react";
+import { Settings2 } from "lucide-react";
 import { useSession } from "next-auth/react";
-import { tree } from "next/dist/build/templates/app-page";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
