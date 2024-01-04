@@ -69,7 +69,9 @@ export default function InventoryID({ params }: any) {
               <Button>Create Folder</Button>
             </div>
           </div>
-          <Separator />
+          <div className="w-full max-w-[730px]">
+            <Separator />
+          </div>
           <div className="w-full max-w-[730px] p-3 h-[450px]"></div>
         </div>
       ) : (
