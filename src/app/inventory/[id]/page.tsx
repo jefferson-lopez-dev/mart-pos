@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useInventory } from "@/hooks";
-import { Settings2 } from "lucide-react";
+import { Settings, Settings2 } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -48,9 +49,12 @@ export default function InventoryID({ params }: any) {
               <h1 className="text-3xl font-semibold">
                 Inventory {inventory?.name ? inventory.name : "loading..."}
               </h1>
-              <button className="w-[40px] h-[40px] flex items-center justify-center rounded-sm">
-                <Settings2 size={24} />
-              </button>
+              <Link
+                href={`/inventory/${params.id}/configuration`}
+                className="w-[40px] h-[40px] flex items-center justify-center rounded-sm"
+              >
+                <Settings size={24} />
+              </Link>
             </div>
             <p className="text-sm">
               {inventory?.description ? inventory.description : "loading..."}
@@ -62,7 +66,7 @@ export default function InventoryID({ params }: any) {
               <Badge variant="secondary">Products 0</Badge>
             </div>
             <div className="flex justify-end">
-              <Button>Add Folder</Button>
+              <Button>Create Folder</Button>
             </div>
           </div>
           <Separator />
