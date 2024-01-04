@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Separator } from "@/components/ui/separator";
 
 function Picture() {
   const {
@@ -74,7 +75,9 @@ export default function Settings() {
           <h1 className="text-3xl font-semibold">Account Settings</h1>
         </div>
       </div>
-      <div className="w-full border-b" />
+      <div className="w-full max-w-[730px]">
+        <Separator />
+      </div>
       <div className="w-full flex flex-col items-center p-3 gap-8">
         <div className="border w-full max-w-[700px] rounded-lg ">
           <div className="h-[120px] flex justify-between items-center">

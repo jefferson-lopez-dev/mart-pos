@@ -14,12 +14,16 @@ import { useForm } from "react-hook-form";
 
 export default function SettingsInventory() {
   const params: any = useParams();
-  const { findByUuid } = useInventory();
+  const { findByUuid, updateDataInventory } = useInventory();
   const { data: session }: any = useSession();
   const [inventory, setInventory] = useState<any>();
   const [fechDataInventory, setFechDataInventory] = useState<any>();
-  const { register } = useForm();
-  console.log(params);
+  const { register, handleSubmit, setValue } = useForm();
+
+  useEffect(() => {
+    setValue("name", inventory?.name);
+    setValue("description", inventory?.description);
+  }, [inventory]);
 
   useEffect(() => {
     async function name() {
@@ -33,7 +37,7 @@ export default function SettingsInventory() {
     if (session?.user !== undefined) {
       name();
     }
-  }, [session?.user?._id, session?.user?.id]);
+  }, [session?.user?._id, session?.user?.id, updateDataInventory]);
 
   return (
     <div className="flex flex-col items-center">
@@ -44,29 +48,55 @@ export default function SettingsInventory() {
           <strong>{inventory?.name}</strong>
         </p>
       </div>
-      <Separator />
-      <div className="w-full max-w-[730px] px-3 py-5">
-        <form>
-          <div className="border w-full max-w-[700px] rounded-lg h-[200px] flex justify-between items-center">
-            <div className="px-5">
-              <h2 className="text-xl h-[40px] font-semibold">Name Inventory</h2>
-              <p className="text-sm">Please enter name inventory.</p>
-              <br />
-              <div className="flex gap-9">
-                <Input
-                  type="text"
-                  {...register("fullname", {
-                    maxLength: 32,
-                  })}
-                />
-                <Button className="w-[100px]" variant="default" type="submit">
-                  Save
-                </Button>
-              </div>
-            </div>
-          </div>
-        </form>
+      <div className="w-full max-w-[730px]">
+        <Separator />
       </div>
+      <div className="w-full max-w-[730px] px-3 pt-3"></div>
+      <form
+        onSubmit={handleSubmit(async (data) => {
+          if (inventory !== undefined) {
+            await updateDataInventory({
+              name: data.name,
+              description: data.description,
+              uuid: inventory.uuid,
+            });
+          }
+        })}
+        className="w-full max-w-[730px] px-3 py-5 flex flex-col gap-7"
+      >
+        <div className="w-full">
+          <h2 className="text-lg">Name Inventory</h2>
+          <p className="pb-5 text-sm text-neutral-500">
+            Enter an inventory name (required).
+          </p>
+          <div className="flex gap-6">
+            <Input
+              autoFocus
+              type="text"
+              {...register("name", { required: true, maxLength: 32 })}
+            />
+            <Button disabled={inventory === undefined}>Save</Button>
+          </div>
+        </div>
+        <div className="w-full">
+          <h2 className="text-lg">Description Inventory</h2>
+          <p className="pb-5 text-sm text-neutral-500">
+            Provide a brief and precise description (optional).
+          </p>
+          <div className="flex gap-6">
+            <Input
+              autoFocus
+              type="text"
+              placeholder={
+                inventory?.description === "" ? "No description" : ""
+              }
+              {...register("description", { maxLength: 104 })}
+            />
+            <Button disabled={inventory === undefined}>Save</Button>
+          </div>
+        </div>
+      </form>
+      <div className="h-[200px]"></div>
     </div>
   );
 }

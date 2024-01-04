@@ -10,7 +10,9 @@ export default function NewInventory() {
           Inventories will help you have better control of your products
         </p>
       </div>
-      <Separator />
+      <div className="w-full max-w-[730px]">
+        <Separator />
+      </div>
       <span className="italic opacity-70 w-full max-w-[730px] px-3 py-3 text-sm">
         Required fields are marked with an asterisk (*).
       </span>

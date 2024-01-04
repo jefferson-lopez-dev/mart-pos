@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
 import Link from "next/link";
 import { RenderInventories } from "./components/render-inventories";
+import { Separator } from "@/components/ui/separator";
 
 export default function Page() {
   return (
@@ -12,7 +13,9 @@ export default function Page() {
           <h1 className="text-3xl font-semibold">Inventory</h1>
         </div>
       </div>
-      <div className="w-full border-b" />
+      <div className="w-full max-w-[730px]">
+        <Separator />
+      </div>
       <div className="flex w-full max-w-[730px] gap-5 px-3 h-[90px] items-center justify-between">
         <div className="flex border w-full h-[45px] rounded-md overflow-hidden items-center">
           <div className="w-[45px] h-[45px] flex items-center justify-center">
