@@ -19,7 +19,7 @@ export function MainNav({
             pn !== "/" && "text-muted-foreground"
           } transition-colors hover:text-primary`}
         >
-          Check in
+          <Button>Sell Product</Button>
         </Link>
         <Link
           href="/"

@@ -56,7 +56,7 @@ export function HeaderPage() {
           </div>
         </div>
       </div>
-      <div className="flex w-full px-2 h-[40px]  bg-inherit">
+      <div className="flex w-full px-2 h-[50px]  bg-inherit">
         <MainNav className="" />
       </div>
     </header>

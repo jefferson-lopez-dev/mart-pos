@@ -81,7 +81,7 @@ export function UserNav() {
               >
                 <SheetClose className="w-full flex items-center gap-2 ">
                   <Receipt className="text-neutral-500" size={20} />
-                  <span>Check in</span>
+                  <span>Sell Product</span>
                 </SheetClose>
               </Button>
             </Link>
