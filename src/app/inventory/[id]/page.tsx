@@ -2,6 +2,7 @@
 "use client";
 
 import { ActionPanel, ActionPanelSkeleton } from "@/components/ActionPanel";
+import { LayoutPage } from "@/components/LayoutPage";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -53,7 +54,9 @@ export default function InventoryID({ params }: any) {
       {inventory === undefined ? (
         <div className="w-full flex flex-col items-center">
           <ActionPanelSkeleton />
-          <div className="h-[400px]"></div>
+          <LayoutPage>
+            <div></div>
+          </LayoutPage>
         </div>
       ) : fechDataInventory?.status === 204 ? (
         <div className="w-full flex flex-col items-center">
@@ -83,23 +86,29 @@ export default function InventoryID({ params }: any) {
               viewKeaworks: true,
             }}
           />
-          <div className="w-full max-w-[730px] p-3 h-[450px]"></div>
+          <LayoutPage>
+            <div></div>
+          </LayoutPage>
         </div>
       ) : (
-        <div className="w-full flex justify-center">
-          <div className="h-[87dvh] w-full max-w-[730px]">
-            <nav className="flex items-center justify-between h-[100px] p-3">
-              <h1 className="text-3xl font-semibold">Inventory Unauthorized</h1>
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  push("/inventory");
-                }}
-              >
-                Back
-              </Button>
-            </nav>
-            <Separator />
+        <div className="w-full flex flex-col">
+          <ActionPanel
+            title="Inventory Unauthorized"
+            description="401:You are not authorized to access this inventory."
+            keaworks={[
+              { text: "Error" },
+              { text: "Unauthorized" },
+              { text: "Private" },
+            ]}
+            preferences={{
+              buttonBack: {
+                render: true,
+                route: "/inventory",
+              },
+              viewKeaworks: true,
+            }}
+          />
+          <LayoutPage>
             <div className="w-full flex items-center justify-center flex-col px-3">
               <span className="text-6xl pt-[140px]">401</span>
               <p className="pt-7 text-center">
@@ -109,7 +118,7 @@ export default function InventoryID({ params }: any) {
                 inventory and make sure you have the necessary permissions.
               </p>
             </div>
-          </div>
+          </LayoutPage>
         </div>
       )}
     </div>
