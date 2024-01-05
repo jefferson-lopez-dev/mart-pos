@@ -51,23 +51,23 @@ export default function SettingsInventory() {
 
   return (
     <div className="flex flex-col items-center">
+      <ActionPanel
+        title="Inventory Configuration"
+        description="Make the required configurations in the inventory."
+        keaworks={[
+          { text: loadingName },
+          { text: "Name" },
+          { text: "Description" },
+        ]}
+        preferences={{
+          buttonBack: {
+            render: true,
+            route: `/inventory/${params.id}`,
+          },
+          viewKeaworks: true,
+        }}
+      />
       <LayoutPage>
-        <ActionPanel
-          title="Inventory Configuration"
-          description="Make the required configurations in the inventory."
-          keaworks={[
-            { text: loadingName },
-            { text: "Name" },
-            { text: "Description" },
-          ]}
-          preferences={{
-            buttonBack: {
-              render: true,
-              route: `/inventory/${params.id}`,
-            },
-            viewKeaworks: true,
-          }}
-        />
         <form
           onSubmit={handleSubmit(async (data) => {
             if (inventory !== undefined) {

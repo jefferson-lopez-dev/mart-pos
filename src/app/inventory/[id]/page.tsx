@@ -53,61 +53,62 @@ export default function InventoryID({ params }: any) {
     <div>
       {inventory === undefined ? (
         <div className="w-full flex flex-col items-center">
+          <ActionPanelSkeleton />
           <LayoutPage>
-            <ActionPanelSkeleton />
             <div></div>
           </LayoutPage>
         </div>
       ) : fechDataInventory?.status === 204 ? (
         <div className="w-full flex flex-col items-center">
+          <ActionPanel
+            title={`Inventory - ${loadingName}`}
+            description={loadingDescription}
+            keaworks={[
+              { text: loadingName },
+              { text: "Folders 0" },
+              { text: "Products 0" },
+            ]}
+            preferences={{
+              buttonBack: {
+                render: true,
+                route: "/inventory",
+              },
+              buttonPrimary: {
+                render: true,
+                icon: "Settings",
+                route: `/inventory/${params.id}/configuration`,
+              },
+              buttonSecondary: {
+                render: true,
+                route: `/inventory/${params.id}`,
+                text: "Create Folder",
+              },
+              viewKeaworks: true,
+            }}
+          />
           <LayoutPage>
-            <ActionPanel
-              title={`Inventory - ${loadingName}`}
-              description={loadingDescription}
-              keaworks={[
-                { text: loadingName },
-                { text: "Folders 0" },
-                { text: "Products 0" },
-              ]}
-              preferences={{
-                buttonBack: {
-                  render: true,
-                  route: "/inventory",
-                },
-                buttonPrimary: {
-                  render: true,
-                  icon: "Settings",
-                  route: `/inventory/${params.id}/configuration`,
-                },
-                buttonSecondary: {
-                  render: true,
-                  route: `/inventory/${params.id}`,
-                  text: "Create Folder",
-                },
-                viewKeaworks: true,
-              }}
-            />
+            <div></div>
           </LayoutPage>
         </div>
       ) : (
         <div className="w-full flex flex-col">
+          <ActionPanel
+            title="Inventory Unauthorized"
+            description="401:You are not authorized to access this inventory."
+            keaworks={[
+              { text: "Error" },
+              { text: "Unauthorized" },
+              { text: "Private" },
+            ]}
+            preferences={{
+              buttonBack: {
+                render: true,
+                route: "/inventory",
+              },
+              viewKeaworks: true,
+            }}
+          />
           <LayoutPage>
-            <ActionPanel
-              title="Inventory Unauthorized"
-              description="401:You are not authorized to access this inventory."
-              keaworks={[
-                { text: "Error" },
-                { text: "Unauthorized" },
-                { text: "Private" },
-              ]}
-              preferences={{
-                buttonBack: {
-                  render: true,
-                  route: "/inventory",
-                },
-                viewKeaworks: true,
-              }}
-            />
             <div className="w-full flex items-center justify-center flex-col px-3">
               <span className="text-6xl pt-[140px]">401</span>
               <p className="pt-7 text-center">
