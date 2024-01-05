@@ -1,10 +1,11 @@
 import { Separator } from "@/components/ui/separator";
 import { FormNewInventory } from "./components/form";
 import { ActionPanel } from "@/components/ActionPanel";
+import { LayoutPage } from "@/components/LayoutPage";
 
 export default function NewInventory() {
   return (
-    <div className="h-[86dvh] w-full flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       <ActionPanel
         title="Create a new inventory"
         description="Inventories will help you have better control of your products."
@@ -21,10 +22,12 @@ export default function NewInventory() {
           viewKeaworks: true,
         }}
       />
-      <span className="italic opacity-70 w-full max-w-[730px] px-3 py-3 text-sm">
-        Required fields are marked with an asterisk (*).
-      </span>
-      <FormNewInventory />
+      <LayoutPage>
+        <span className="italic opacity-70 w-full px-3 py-3 text-sm">
+          Required fields are marked with an asterisk (*).
+        </span>
+        <FormNewInventory />
+      </LayoutPage>
     </div>
   );
 }
