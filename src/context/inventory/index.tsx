@@ -18,7 +18,7 @@ const InventoryContext = createContext({});
 
 const InventoryProvider = ({ children }: children) => {
   const [inventories, setInventories] = useState([]);
-  const [loadingInventory, setLoadingInventory] = useState(false);
+  const [loadingInventory, setLoadingInventory] = useState(true);
   const { data: session }: any = useSession();
   const { push } = useRouter();
   const { toast } = useToast();
@@ -28,6 +28,7 @@ const InventoryProvider = ({ children }: children) => {
       create_by: session?.user?._id ? session?.user?._id : session?.user?.id,
     });
     setInventories(res.data.Inventory.docs);
+    setLoadingInventory(false);
   };
 
   const findByUuid = async (uuid: string, create_by: string) => {
@@ -56,8 +57,10 @@ const InventoryProvider = ({ children }: children) => {
   };
 
   useEffect(() => {
-    findAll();
-  }, [session]);
+    if (session?.user !== undefined) {
+      findAll();
+    }
+  }, [session?.user?._id, session?.user?.id]);
 
   return (
     <InventoryContext.Provider
