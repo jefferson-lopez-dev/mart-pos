@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { ActionPanel, ActionPanelSkeleton } from "@/components/ActionPanel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -17,7 +18,20 @@ export default function InventoryID({ params }: any) {
   const { data: session }: any = useSession();
   const [inventory, setInventory] = useState<any>();
   const [fechDataInventory, setFechDataInventory] = useState<any>();
+  const [loadingInventory, setLoadingInventory] = useState(true);
   const { push } = useRouter();
+
+  const loadingName = loadingInventory
+    ? "Loading..."
+    : inventory?.name === ""
+    ? "No Name"
+    : inventory?.name;
+
+  const loadingDescription = loadingInventory
+    ? "Loading..."
+    : inventory?.description === ""
+    ? "No Description"
+    : inventory?.description;
 
   useEffect(() => {
     async function name() {
@@ -27,6 +41,7 @@ export default function InventoryID({ params }: any) {
       );
       setInventory(res.inventory);
       setFechDataInventory(res);
+      setLoadingInventory(false);
     }
     if (session?.user !== undefined) {
       name();
@@ -37,41 +52,37 @@ export default function InventoryID({ params }: any) {
     <div>
       {inventory === undefined ? (
         <div className="w-full flex flex-col items-center">
-          <div className="w-full max-w-[730px] flex flex-col gap-5 p-3">
-            <Skeleton className="w-full h-[100px]" />
-            <Skeleton className="w-full h-[450px]" />
-          </div>
+          <ActionPanelSkeleton />
+          <div className="h-[400px]"></div>
         </div>
       ) : fechDataInventory?.status === 204 ? (
         <div className="w-full flex flex-col items-center">
-          <nav className="w-full max-w-[730px] px-3 h-[100px] flex flex-col justify-center">
-            <div className="w-full flex justify-between">
-              <h1 className="text-3xl font-semibold">
-                Inventory {inventory?.name ? inventory.name : "loading..."}
-              </h1>
-              <Link
-                href={`/inventory/${params.id}/configuration`}
-                className="w-[40px] h-[40px] flex items-center justify-center rounded-sm"
-              >
-                <Settings size={24} />
-              </Link>
-            </div>
-            <p className="text-sm">
-              {inventory?.description ? inventory.description : "loading..."}
-            </p>
-          </nav>
-          <div className="w-full max-w-[730px] p-3 flex items-center justify-between">
-            <div className="flex gap-3 ">
-              <Badge variant="secondary">Folders 0</Badge>
-              <Badge variant="secondary">Products 0</Badge>
-            </div>
-            <div className="flex justify-end">
-              <Button>Create Folder</Button>
-            </div>
-          </div>
-          <div className="w-full max-w-[730px]">
-            <Separator />
-          </div>
+          <ActionPanel
+            title={`Inventory - ${loadingName}`}
+            description={loadingDescription}
+            keaworks={[
+              { text: loadingName },
+              { text: "Folders 0" },
+              { text: "Products 0" },
+            ]}
+            preferences={{
+              buttonBack: {
+                render: true,
+                route: "/inventory",
+              },
+              buttonPrimary: {
+                render: true,
+                icon: "Settings",
+                route: `/inventory/${params.id}/configuration`,
+              },
+              buttonSecondary: {
+                render: true,
+                route: `/inventory/${params.id}`,
+                text: "Create Folder",
+              },
+              viewKeaworks: true,
+            }}
+          />
           <div className="w-full max-w-[730px] p-3 h-[450px]"></div>
         </div>
       ) : (
