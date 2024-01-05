@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
+import { ActionPanel } from "@/components/ActionPanel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,7 +19,14 @@ export default function SettingsInventory() {
   const { data: session }: any = useSession();
   const [inventory, setInventory] = useState<any>();
   const [fechDataInventory, setFechDataInventory] = useState<any>();
+  const [loadingInventory, setLoadingInventory] = useState(true);
   const { register, handleSubmit, setValue } = useForm();
+
+  const loadingName = loadingInventory
+    ? "Loading..."
+    : inventory?.name === ""
+    ? "No Name"
+    : inventory?.name;
 
   useEffect(() => {
     setValue("name", inventory?.name);
@@ -33,6 +41,7 @@ export default function SettingsInventory() {
       );
       setInventory(res.inventory);
       setFechDataInventory(res);
+      setLoadingInventory(false);
     }
     if (session?.user !== undefined) {
       name();
@@ -41,17 +50,22 @@ export default function SettingsInventory() {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="w-full max-w-[730px] px-3 h-[120px] flex flex-col justify-center ">
-        <h1 className="text-3xl font-semibold">Inventory Configuration</h1>
-        <p className="text-sm text-neutral-500">
-          Realiza las configuraciones nesesesarias al inventario{" "}
-          <strong>{inventory?.name}</strong>
-        </p>
-      </div>
-      <div className="w-full max-w-[730px]">
-        <Separator />
-      </div>
-      <div className="w-full max-w-[730px] px-3 pt-3"></div>
+      <ActionPanel
+        title="Inventory Configuration"
+        description="Make the required configurations in the inventory."
+        keaworks={[
+          { text: loadingName },
+          { text: "Name" },
+          { text: "Description" },
+        ]}
+        preferences={{
+          buttonBack: {
+            render: true,
+            route: `/inventory/${params.id}`,
+          },
+          viewKeaworks: true,
+        }}
+      />
       <form
         onSubmit={handleSubmit(async (data) => {
           if (inventory !== undefined) {
