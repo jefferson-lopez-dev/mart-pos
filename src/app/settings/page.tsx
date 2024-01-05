@@ -75,19 +75,19 @@ export default function Settings() {
 
   return (
     <div className="flex flex-col items-center">
-      <ActionPanel
-        title="Account Settings"
-        description="Make the necessary account settings."
-        keaworks={[{ text: loadingName }]}
-        preferences={{
-          buttonBack: {
-            render: true,
-            route: "/",
-          },
-          viewKeaworks: true,
-        }}
-      />
       <LayoutPage>
+        <ActionPanel
+          title="Account Settings"
+          description="Make the necessary account settings."
+          keaworks={[{ text: loadingName }]}
+          preferences={{
+            buttonBack: {
+              render: true,
+              route: "/",
+            },
+            viewKeaworks: true,
+          }}
+        />
         <div className="w-full flex flex-col items-center p-3 gap-8">
           <div className="border w-full max-w-[700px] rounded-lg ">
             <div className="h-[120px] flex justify-between items-center">

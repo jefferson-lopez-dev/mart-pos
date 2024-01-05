@@ -15,25 +15,25 @@ export default function Page() {
 
   return (
     <div className="w-full flex flex-col items-center">
-      <ActionPanel
-        title="Inventory"
-        description="Create, edit and manage professionally."
-        keaworks={[
-          {
-            text: loading,
-          },
-        ]}
-        preferences={{
-          buttonBack: { render: true, route: "/" },
-          buttonSecondary: {
-            render: true,
-            text: "Create Inventory",
-            route: "/inventory/new",
-          },
-          viewKeaworks: true,
-        }}
-      />
       <LayoutPage>
+        <ActionPanel
+          title="Inventory"
+          description="Create, edit and manage professionally."
+          keaworks={[
+            {
+              text: loading,
+            },
+          ]}
+          preferences={{
+            buttonBack: { render: true, route: "/" },
+            buttonSecondary: {
+              render: true,
+              text: "Create Inventory",
+              route: "/inventory/new",
+            },
+            viewKeaworks: true,
+          }}
+        />
         <RenderInventories />
       </LayoutPage>
     </div>
