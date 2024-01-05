@@ -74,7 +74,7 @@ export function ActionPanel({
               onClick={() => {
                 push(routeButtonBack);
               }}
-              className="h-[40px] text-sm flex items-center gap-1 text-neutral-500"
+              className="h-[40px] rounded-md pr-3 text-sm flex items-center gap-1 text-neutral-500"
             >
               <Icon.ArrowLeft size={15} />
               Back
@@ -87,7 +87,7 @@ export function ActionPanel({
               onClick={() => {
                 push(routeButtonPrimary);
               }}
-              className="h-[40px] flex items-center"
+              className="h-[40px] w-[40px] rounded-md flex items-center justify-center"
             >
               {IconComponent && <IconComponent size={20} />}
             </button>
