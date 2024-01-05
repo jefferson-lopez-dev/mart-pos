@@ -1,10 +1,7 @@
 "use client";
-import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
-import Link from "next/link";
 import { RenderInventories } from "./components/render-inventories";
-import { Separator } from "@/components/ui/separator";
 import { ActionPanel } from "@/components/ActionPanel";
+import { LayoutPage } from "@/components/LayoutPage";
 import { useInventory } from "@/hooks";
 
 export default function Page() {
@@ -17,7 +14,7 @@ export default function Page() {
     : `Total ${inventories.length}`;
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       <ActionPanel
         title="Inventory"
         description="Create, edit and manage professionally."
@@ -36,7 +33,9 @@ export default function Page() {
           viewKeaworks: true,
         }}
       />
-      <RenderInventories />
+      <LayoutPage>
+        <RenderInventories />
+      </LayoutPage>
     </div>
   );
 }
