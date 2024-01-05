@@ -24,12 +24,103 @@ import {
   Folder,
   StretchHorizontal,
 } from "lucide-react";
+import * as IconLucide from "lucide-react";
+import { useRouter } from "next/navigation";
+
+interface typeButtonSheetMart {
+  icon?: keyof typeof IconLucide;
+  text?: string;
+  route?: {
+    render?: boolean;
+    value?: string;
+  };
+  click?: {
+    render?: boolean;
+    logic?: () => void;
+  };
+}
+
+const buttonsSheetMart: typeButtonSheetMart[][] = [
+  [
+    {
+      icon: "Receipt",
+      text: "Sell Product",
+      route: {
+        render: true,
+        value: "/",
+      },
+    },
+    {
+      icon: "LayoutDashboard",
+      text: "Dashboard",
+      route: {
+        render: true,
+        value: "/",
+      },
+    },
+    {
+      icon: "Box",
+      text: "Inventory",
+      route: {
+        render: true,
+        value: "/inventory",
+      },
+    },
+    {
+      icon: "Settings",
+      text: "Settings",
+      route: {
+        render: true,
+        value: "/settings",
+      },
+    },
+  ],
+  [
+    {
+      icon: "BadgeDollarSign",
+      text: "Sales",
+      route: {
+        render: true,
+        value: "/",
+      },
+    },
+    {
+      icon: "Folder",
+      text: "Folders",
+      route: {
+        render: true,
+        value: "/",
+      },
+    },
+    {
+      icon: "StretchHorizontal",
+      text: "Products",
+      route: {
+        render: true,
+        value: "/",
+      },
+    },
+  ],
+  [
+    {
+      icon: "LogOut",
+      text: "Log out",
+      click: {
+        render: true,
+        logic: () => {
+          signOut();
+        },
+      },
+    },
+  ],
+];
 
 export function UserNav() {
   const {
     data: { picture, fullname },
   } = useProfile();
   const { data: session }: any = useSession();
+  const { push } = useRouter();
   const not_picture_url =
     "https://res.cloudinary.com/jeffersoncloud/image/upload/v1701628837/photos/e9fqfyuthrjjo9ojcw6p.jpg";
 
@@ -48,7 +139,7 @@ export function UserNav() {
           </Button>
         </SheetTrigger>
         <SheetContent>
-          <SheetHeader>
+          <SheetHeader className="pb-3">
             <SheetTitle>
               <div className="w-full flex items-center gap-3">
                 <Avatar className="h-12 w-12">
@@ -70,92 +161,94 @@ export function UserNav() {
             </SheetTitle>
             <SheetDescription></SheetDescription>
           </SheetHeader>
-          <br />
           <Separator />
-          <br />
-          <div className="w-full flex flex-col">
-            <Link href="/">
-              <Button
-                variant="ghost"
-                className="w-full justify-start flex gap-2"
-              >
-                <SheetClose className="w-full flex items-center gap-2 ">
-                  <Receipt className="text-neutral-500" size={20} />
-                  <span>Sell Product</span>
-                </SheetClose>
-              </Button>
-            </Link>
-            <Link href="/">
-              <Button
-                variant="ghost"
-                className="w-full justify-start flex gap-2"
-              >
-                <SheetClose className="w-full flex items-center gap-2 ">
-                  <LayoutDashboard className="text-neutral-500" size={20} />
-                  <span>Dashboard</span>
-                </SheetClose>
-              </Button>
-            </Link>
-            <Link href="/inventory">
-              <Button
-                variant="ghost"
-                className="w-full justify-start flex gap-2"
-              >
-                <SheetClose className="w-full flex items-center gap-2 ">
-                  <Box className="text-neutral-500" size={20} />
-                  <span>Inventory</span>
-                </SheetClose>
-              </Button>
-            </Link>
-            <Link href="/settings">
-              <Button variant="ghost" className="w-full justify-start flex">
-                <SheetClose className="w-full flex items-center gap-2 ">
-                  <Settings className="text-neutral-500" size={20} />
-                  <span>Settings</span>
-                </SheetClose>
-              </Button>
-            </Link>
+          <div className="w-full flex flex-col py-3">
+            {buttonsSheetMart[0].map((button, i) => {
+              const IconComponent =
+                button.icon && (IconLucide[button.icon] as any);
+              return (
+                <Button
+                  asChild
+                  key={i}
+                  variant="ghost"
+                  className="w-full justify-start flex gap-2"
+                  onClick={() => {
+                    if (button.route?.render) {
+                      push(button.route.value ? button.route.value : "/");
+                    }
+                    if (button.click?.render) {
+                      button.click.logic ? button.click.logic() : () => {};
+                    }
+                  }}
+                >
+                  <SheetClose className="w-full flex items-center gap-2 ">
+                    <IconComponent className="text-neutral-500" size={20} />
+                    <span>{button.text}</span>
+                  </SheetClose>
+                </Button>
+              );
+            })}
           </div>
-          <br />
           <Separator />
-          <br />
-          <Link href="/">
-            <Button variant="ghost" className="w-full justify-start flex gap-2">
-              <SheetClose className="w-full flex items-center gap-2 ">
-                <BadgeDollarSign className="text-neutral-500" size={20} />
-                <span>Sales</span>
-              </SheetClose>
-            </Button>
-          </Link>
-          <Link href="/">
-            <Button variant="ghost" className="w-full justify-start flex gap-2">
-              <SheetClose className="w-full flex items-center gap-2 ">
-                <Folder className="text-neutral-500" size={20} />
-                <span>Folders</span>
-              </SheetClose>
-            </Button>
-          </Link>
-          <Link href="/">
-            <Button variant="ghost" className="w-full justify-start flex gap-2">
-              <SheetClose className="w-full flex items-center gap-2 ">
-                <StretchHorizontal className="text-neutral-500" size={20} />
-                <span>Products</span>
-              </SheetClose>
-            </Button>
-          </Link>
-          <br />
+          <div className="w-full flex flex-col py-3">
+            {buttonsSheetMart[1].map((button, i) => {
+              const IconComponent =
+                button.icon && (IconLucide[button.icon] as any);
+              return (
+                <Button
+                  asChild
+                  key={i}
+                  variant="ghost"
+                  className="w-full justify-start flex gap-2"
+                  onClick={() => {
+                    if (button.route?.render) {
+                      push(button.route.value ? button.route.value : "/");
+                    }
+                    if (button.click?.render) {
+                      button.click.logic ? button.click.logic() : () => {};
+                    }
+                  }}
+                >
+                  <SheetClose className="w-full flex items-center gap-2 ">
+                    <IconComponent className="text-neutral-500" size={20} />
+                    <span>{button.text}</span>
+                  </SheetClose>
+                </Button>
+              );
+            })}
+          </div>
           <Separator />
-          <br />
-          <div className="w-full flex flex-col">
-            <Button
-              onClick={() => {
-                signOut();
-              }}
-              variant="default"
-              className="w-full justify-start flex gap-2"
-            >
-              <LogOut className="text-neutral-500" size={20} />
-              <span>Log out</span>
+          <div className="w-full flex flex-col py-3">
+            {buttonsSheetMart[2].map((button, i) => {
+              const IconComponent =
+                button.icon && (IconLucide[button.icon] as any);
+              return (
+                <Button
+                  asChild
+                  key={i}
+                  variant="ghost"
+                  className="w-full justify-start flex gap-2"
+                  onClick={() => {
+                    if (button.route?.render) {
+                      push(button.route.value ? button.route.value : "/");
+                    }
+                    if (button.click?.render) {
+                      button.click.logic ? button.click.logic() : () => {};
+                    }
+                  }}
+                >
+                  <SheetClose className="w-full flex items-center gap-2 ">
+                    <IconComponent className="text-neutral-500" size={20} />
+                    <span>{button.text}</span>
+                  </SheetClose>
+                </Button>
+              );
+            })}
+          </div>
+          <Separator />
+          <div className="w-full flex flex-col py-3">
+            <Button variant="default" className="w-full">
+              <span>Subscription</span>
             </Button>
           </div>
         </SheetContent>
