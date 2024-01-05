@@ -30,14 +30,6 @@ export function MainNav({
           Dashboard
         </Link>
         <Link
-          href="/"
-          className={`break-normal text-sm font-medium ${
-            pn !== "/sales" && "text-muted-foreground"
-          } transition-colors hover:text-primary`}
-        >
-          Sales
-        </Link>
-        <Link
           href="/inventory"
           className={`break-normal text-sm font-medium ${
             pn !== "/inventory" && "text-muted-foreground"
@@ -48,18 +40,10 @@ export function MainNav({
         <Link
           href="/"
           className={`break-normal text-sm font-medium ${
-            pn !== "/Overview" && "text-muted-foreground"
+            pn !== "/sales" && "text-muted-foreground"
           } transition-colors hover:text-primary`}
         >
-          Folders
-        </Link>
-        <Link
-          href="/"
-          className={`break-normal text-sm font-medium ${
-            pn !== "/Overview" && "text-muted-foreground"
-          } transition-colors hover:text-primary`}
-        >
-          Products
+          Sales
         </Link>
         <Link
           href="/settings"
