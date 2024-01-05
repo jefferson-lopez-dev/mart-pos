@@ -20,6 +20,9 @@ import {
   Settings,
   LayoutDashboard,
   BadgeDollarSign,
+  Receipt,
+  Folder,
+  StretchHorizontal,
 } from "lucide-react";
 
 export function UserNav() {
@@ -71,14 +74,14 @@ export function UserNav() {
           <Separator />
           <br />
           <div className="w-full flex flex-col">
-            <Link href="/inventory">
+            <Link href="/">
               <Button
                 variant="ghost"
                 className="w-full justify-start flex gap-2"
               >
                 <SheetClose className="w-full flex items-center gap-2 ">
-                  <Box className="text-neutral-500" size={20} />
-                  <span>Inventory</span>
+                  <Receipt className="text-neutral-500" size={20} />
+                  <span>Check in</span>
                 </SheetClose>
               </Button>
             </Link>
@@ -93,14 +96,14 @@ export function UserNav() {
                 </SheetClose>
               </Button>
             </Link>
-            <Link href="/">
+            <Link href="/inventory">
               <Button
                 variant="ghost"
                 className="w-full justify-start flex gap-2"
               >
                 <SheetClose className="w-full flex items-center gap-2 ">
-                  <BadgeDollarSign className="text-neutral-500" size={20} />
-                  <span>Sales</span>
+                  <Box className="text-neutral-500" size={20} />
+                  <span>Inventory</span>
                 </SheetClose>
               </Button>
             </Link>
@@ -113,6 +116,33 @@ export function UserNav() {
               </Button>
             </Link>
           </div>
+          <br />
+          <Separator />
+          <br />
+          <Link href="/">
+            <Button variant="ghost" className="w-full justify-start flex gap-2">
+              <SheetClose className="w-full flex items-center gap-2 ">
+                <BadgeDollarSign className="text-neutral-500" size={20} />
+                <span>Sales</span>
+              </SheetClose>
+            </Button>
+          </Link>
+          <Link href="/">
+            <Button variant="ghost" className="w-full justify-start flex gap-2">
+              <SheetClose className="w-full flex items-center gap-2 ">
+                <Folder className="text-neutral-500" size={20} />
+                <span>Folders</span>
+              </SheetClose>
+            </Button>
+          </Link>
+          <Link href="/">
+            <Button variant="ghost" className="w-full justify-start flex gap-2">
+              <SheetClose className="w-full flex items-center gap-2 ">
+                <StretchHorizontal className="text-neutral-500" size={20} />
+                <span>Products</span>
+              </SheetClose>
+            </Button>
+          </Link>
           <br />
           <Separator />
           <br />
