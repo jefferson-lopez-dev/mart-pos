@@ -2,6 +2,7 @@
 "use client";
 
 import { ActionPanel } from "@/components/ActionPanel";
+import { LayoutPage } from "@/components/LayoutPage";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -66,51 +67,52 @@ export default function SettingsInventory() {
           viewKeaworks: true,
         }}
       />
-      <form
-        onSubmit={handleSubmit(async (data) => {
-          if (inventory !== undefined) {
-            await updateDataInventory({
-              name: data.name,
-              description: data.description,
-              uuid: inventory.uuid,
-            });
-          }
-        })}
-        className="w-full max-w-[730px] px-3 py-5 flex flex-col gap-7"
-      >
-        <div className="w-full">
-          <h2 className="text-lg">Name Inventory</h2>
-          <p className="pb-5 text-sm text-neutral-500">
-            Enter an inventory name (required).
-          </p>
-          <div className="flex gap-6">
-            <Input
-              autoFocus
-              type="text"
-              {...register("name", { required: true, maxLength: 32 })}
-            />
-            <Button disabled={inventory === undefined}>Save</Button>
+      <LayoutPage>
+        <form
+          onSubmit={handleSubmit(async (data) => {
+            if (inventory !== undefined) {
+              await updateDataInventory({
+                name: data.name,
+                description: data.description,
+                uuid: inventory.uuid,
+              });
+            }
+          })}
+          className="w-full max-w-[730px] px-3 py-5 flex flex-col gap-7"
+        >
+          <div className="w-full">
+            <h2 className="text-lg">Name Inventory</h2>
+            <p className="pb-5 text-sm text-neutral-500">
+              Enter an inventory name (required).
+            </p>
+            <div className="flex gap-6">
+              <Input
+                autoFocus
+                type="text"
+                {...register("name", { required: true, maxLength: 32 })}
+              />
+              <Button disabled={inventory === undefined}>Save</Button>
+            </div>
           </div>
-        </div>
-        <div className="w-full">
-          <h2 className="text-lg">Description Inventory</h2>
-          <p className="pb-5 text-sm text-neutral-500">
-            Provide a brief and precise description (optional).
-          </p>
-          <div className="flex gap-6">
-            <Input
-              autoFocus
-              type="text"
-              placeholder={
-                inventory?.description === "" ? "No description" : ""
-              }
-              {...register("description", { maxLength: 104 })}
-            />
-            <Button disabled={inventory === undefined}>Save</Button>
+          <div className="w-full">
+            <h2 className="text-lg">Description Inventory</h2>
+            <p className="pb-5 text-sm text-neutral-500">
+              Provide a brief and precise description (optional).
+            </p>
+            <div className="flex gap-6">
+              <Input
+                autoFocus
+                type="text"
+                placeholder={
+                  inventory?.description === "" ? "No description" : ""
+                }
+                {...register("description", { maxLength: 104 })}
+              />
+              <Button disabled={inventory === undefined}>Save</Button>
+            </div>
           </div>
-        </div>
-      </form>
-      <div className="h-[200px]"></div>
+        </form>
+      </LayoutPage>
     </div>
   );
 }
