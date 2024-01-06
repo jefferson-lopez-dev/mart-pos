@@ -72,13 +72,25 @@ export default function Settings() {
 
   const loadingName =
     fullname === undefined ? "Loading..." : fullname === "" ? "Name" : fullname;
+  const loadingGmail =
+    fullname === undefined ? "Loading..." : email === "" ? "Gmail" : email;
+  const loadingCountry =
+    fullname === undefined
+      ? "Loading..."
+      : country === ""
+      ? "Country"
+      : country;
 
   return (
     <div className="flex flex-col items-center">
       <ActionPanel
         title="Account Settings"
         description="Make the necessary account settings."
-        keaworks={[{ text: loadingName }]}
+        keaworks={[
+          { text: loadingName },
+          { text: loadingGmail },
+          { text: loadingCountry },
+        ]}
         preferences={{
           buttonBack: {
             render: true,
