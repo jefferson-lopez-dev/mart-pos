@@ -39,7 +39,7 @@ export function HeaderPage() {
 
   return (
     <header className="border-b sticky top-0 bg-inherit z-10">
-      <div className="h-[9dvh] bg-inherit flex items-start w-full overflow-hidden">
+      <div className="h-[60px] bg-inherit flex items-start w-full overflow-hidden">
         <div className="flex h-full w-full flex-col justify-around">
           <div className="flex w-full items-center px-2">
             <Image
