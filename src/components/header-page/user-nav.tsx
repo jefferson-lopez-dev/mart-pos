@@ -77,8 +77,8 @@ const buttonsSheetMart: typeButtonSheetMart[][] = [
   ],
   [
     {
-      icon: "BadgeDollarSign",
-      text: "Sales",
+      icon: "History",
+      text: "History Sales",
       route: {
         render: true,
         value: "/",
