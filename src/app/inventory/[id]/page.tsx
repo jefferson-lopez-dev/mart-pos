@@ -94,7 +94,7 @@ export default function InventoryID({ params }: any) {
             description={loadingDescription}
             keaworks={[
               { text: loadingName },
-              { text: "Folders 0" },
+              { text: `Folders ${folders.length}` },
               { text: "Products 0" },
             ]}
             preferences={{
