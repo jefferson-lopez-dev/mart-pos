@@ -1,5 +1,5 @@
 "use client";
-import { AuthProvider, ProfileUserProvider } from "./context";
+import { AuthProvider, ProfileUserProvider, FolderProvider } from "./context";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { children } from "./interface";
 import { HeaderPage } from "./components/header-page";
@@ -22,13 +22,15 @@ export function MartProvider({ children }: children) {
         <AuthProvider>
           <ProfileUserProvider>
             <InventoryProvider>
-              {path !== "/auth/login" && path !== "/auth/register" && (
-                <HeaderPage />
-              )}
-              {children}
-              {path !== "/auth/login" && path !== "/auth/register" && (
-                <FooterPage />
-              )}
+              <FolderProvider>
+                {path !== "/auth/login" && path !== "/auth/register" && (
+                  <HeaderPage />
+                )}
+                {children}
+                {path !== "/auth/login" && path !== "/auth/register" && (
+                  <FooterPage />
+                )}
+              </FolderProvider>
             </InventoryProvider>
             <Toaster />
           </ProfileUserProvider>
