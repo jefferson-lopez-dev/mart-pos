@@ -1,5 +1,4 @@
 "use client";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/hooks/use-profile";
@@ -14,16 +13,6 @@ import {
   SheetTrigger,
   SheetClose,
 } from "@/components/ui/sheet";
-import {
-  Box,
-  LogOut,
-  Settings,
-  LayoutDashboard,
-  BadgeDollarSign,
-  Receipt,
-  Folder,
-  StretchHorizontal,
-} from "lucide-react";
 import * as IconLucide from "lucide-react";
 import { useRouter } from "next/navigation";
 
