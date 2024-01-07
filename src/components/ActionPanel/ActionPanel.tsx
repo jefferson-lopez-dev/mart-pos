@@ -87,7 +87,7 @@ export function ActionPanel({
               onClick={() => {
                 push(routeButtonPrimary);
               }}
-              className="h-[40px] w-[40px] rounded-md flex items-center justify-center"
+              className="h-[40px] w-[40px] rounded-md flex items-center justify-center text-neutral-500"
             >
               {IconComponent && <IconComponent size={20} />}
             </button>
