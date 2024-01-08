@@ -123,7 +123,7 @@ export default function InventoryID({ params }: any) {
               <ScrollArea className="h-[300px]">
                 {folders?.length === 0 ? (
                   <p className="w-full h-[300px] flex items-center justify-center text-neutral-500">
-                    No Products
+                    No Folders
                   </p>
                 ) : (
                   folders.map((folder: any, i: any) => {
