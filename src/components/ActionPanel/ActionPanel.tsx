@@ -22,6 +22,12 @@ interface Preferences {
   buttonBack?: {
     render?: boolean;
     route?: string;
+    text?: string;
+  };
+  iconTitle?: {
+    render?: boolean;
+    icon?: keyof typeof Icon | undefined;
+    fill?: boolean;
   };
   viewKeaworks?: boolean;
 }
@@ -49,11 +55,17 @@ export function ActionPanel({
     buttonBack: {
       render: renderButtonBack = false,
       route: routeButtonBack = "/",
+      text: textButtonBack = "Back",
     } = {},
     buttonPrimary: {
       render: renderButtonPrimary = false,
       icon: iconButtonPrimary = undefined,
       route: routeButtonPrimary = "/",
+    } = {},
+    iconTitle: {
+      render: renderIconTitle = false,
+      icon: iconTitle = undefined,
+      fill: iconTitleFill = false,
     } = {},
     buttonSecondary: {
       render: renderButtonSecondary = false,
@@ -65,6 +77,8 @@ export function ActionPanel({
 }: Props) {
   const { push } = useRouter();
   const IconComponent = iconButtonPrimary && (Icon[iconButtonPrimary] as any);
+  const IconTitle = iconTitle && (Icon[iconTitle] as any);
+
   return (
     <div className="w-full flex justify-center">
       <div className="w-full max-w-[730px] flex flex-col">
@@ -77,7 +91,7 @@ export function ActionPanel({
               className="h-[40px] rounded-md pr-3 text-sm flex items-center gap-1 text-neutral-500"
             >
               <Icon.ArrowLeft size={15} />
-              Back
+              {textButtonBack}
             </button>
           ) : (
             <div />
@@ -94,9 +108,17 @@ export function ActionPanel({
           )}
         </div>
         <div className="w-full h-[70px] px-3 flex flex-col justify-center">
-          <h1 className="text-3xl whitespace-nowrap font-bold w-full text-ellipsis overflow-hidden">
-            {title}
-          </h1>
+          <div className="flex items-center justify-start gap-1">
+            {renderIconTitle && (
+              <IconTitle
+                size={30}
+                className={iconTitleFill ? "fill-black dark:fill-white" : ""}
+              />
+            )}
+            <h1 className="text-3xl whitespace-nowrap font-bold w-full text-ellipsis overflow-hidden">
+              {title}
+            </h1>
+          </div>
           <p className="text-neutral-500 whitespace-nowrap w-full text-ellipsis overflow-hidden text-base">
             {description}
           </p>

@@ -1,5 +1,5 @@
 import { Separator } from "@/components/ui/separator";
-import { FormNewInventory } from "./components/form";
+import { FormNewInventory } from "./form";
 import { ActionPanel } from "@/components/ActionPanel";
 import { LayoutPage } from "@/components/LayoutPage";
 
@@ -18,6 +18,7 @@ export default function NewInventory() {
           buttonBack: {
             render: true,
             route: "/inventory",
+            text: "Back to inventory",
           },
           viewKeaworks: true,
         }}

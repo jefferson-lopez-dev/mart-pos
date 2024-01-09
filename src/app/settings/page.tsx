@@ -95,6 +95,7 @@ export default function Settings() {
           buttonBack: {
             render: true,
             route: "/",
+            text: "Home",
           },
           viewKeaworks: true,
         }}

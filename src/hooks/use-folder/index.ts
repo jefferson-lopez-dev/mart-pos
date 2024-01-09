@@ -7,6 +7,12 @@ interface TypeCreateFolder {
   inventory_id: string;
 }
 
+interface TypeEditFolder {
+  name: string;
+  description: string;
+  folder_uuid: string;
+}
+
 interface Values {
   SearchInventoryFolders: (
     inventory_id: string,
@@ -14,6 +20,8 @@ interface Values {
   ) => Promise<any>;
   allFolders: () => Promise<any>;
   CreateFolder: (data: TypeCreateFolder) => Promise<any>;
+  EditFolder: (data: TypeEditFolder) => Promise<any>;
+  SearchAFolder: (folder_uuid: string) => Promise<any>;
 }
 
 export const useFolder = () => {
